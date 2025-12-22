@@ -31,7 +31,38 @@
         @media (max-width: 600px) { header h1 { font-size: 1.8rem; } .geez-text { font-size: 1.5rem; } }
     </style>
 </head>
-<body>
+< <!-- የፈቃድ መጠየቂያ መልዕክት (Cookie Consent) -->
+<div id="cookieConsent" style="position: fixed; bottom: 0; width: 100%; background: #ffffff; border-top: 3px solid #1b4332; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); padding: 20px; z-index: 10000; display: none;">
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px; margin-right: 20px;">
+            <p style="margin: 0; font-size: 0.95rem; color: #2d3436; line-height: 1.6;">
+                ለእርስዎ የተሻለ አገልግሎት ለመስጠት፣ የድረ-ገጹን እንቅስቃሴ ለመተንተን እና ተዛማጅ ማስታወቂያዎችን (AdSense) ለማሳየት ኩኪዎችን (Cookies) እንጠቀማለን። በዚህ ድረ-ገጽ ላይ በመቆየትዎ በኩኪዎች አጠቃቀማችን መስማማትዎን ያረጋግጣሉ።
+            </p>
+        </div>
+        <div style="margin-top: 15px;">
+            <button onclick="acceptCookies()" style="background: #1b4332; color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-right: 10px;">እስማማለሁ</button>
+            <a onclick="showSection('privacy')" style="color: #1b4332; text-decoration: underline; font-size: 0.85rem; cursor: pointer;">ተጨማሪ መረጃ</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ኩኪውን መቀበላቸውን ለማረጋገጥ
+    function acceptCookies() {
+        localStorage.setItem('cookieAccepted', 'true');
+        document.getElementById('cookieConsent').style.display = 'none';
+    }
+
+    // ገጹ ሲከፈት ከዚህ በፊት ተስማምተው እንደሆነ ለማየት
+    window.onload = function() {
+        if (!localStorage.getItem('cookieAccepted')) {
+            setTimeout(function() {
+                document.getElementById('cookieConsent').style.display = 'block';
+            }, 2000); // ገጹ ከተከፈተ ከ2 ሰከንድ በኋላ እንዲመጣ
+        }
+    };
+</script>
+/body>
 
 <header>
     <h1>መጽሐፈ ሰዋስው ወግሥ</h1>
