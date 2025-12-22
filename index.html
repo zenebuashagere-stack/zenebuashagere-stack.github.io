@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>መጽሐፈ ሰዋስው ወግሥ</title>
+    <title>መጽሐፈ ሰዋስው ወግሥ - ዲያቆን ከውን ደጀን</title>
 
-    <!-- Google AdSense Code (የማይነካ) -->
+    <!-- Google AdSense - ያንተ ልዩ መለያ ኮድ እዚህ ገብቷል -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764197307756069" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #1b4332; --accent: #d4a373; --bg: #fcfaf5; --text: #2d3436; }
+        :root { --primary: #1b4332; --accent: #d4a373; --bg: #fcfaf5; --text: #2d3436; --card: #ffffff; }
         body { font-family: 'Noto Sans Ethiopic', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
         header { background: var(--primary); color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid var(--accent); }
         nav { background: #122b21; padding: 12px; text-align: center; position: sticky; top: 0; z-index: 1000; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-size: 0.95rem; cursor: pointer; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-size: 0.95rem; cursor: pointer; font-weight: bold; }
         .search-area { max-width: 600px; margin: -30px auto 20px; padding: 0 20px; position: relative; z-index: 100; }
-        .search-box { width: 100%; padding: 18px 25px; border-radius: 50px; border: none; box-shadow: 0 8px 20px rgba(0,0,0,0.15); font-size: 1.1rem; outline: none; box-sizing: border-box; }
-        main { max-width: 800px; margin: 0 auto; padding: 20px; min-height: 70vh; }
-        .section { display: none; }
+        .search-box { width: 100%; padding: 20px 30px; border-radius: 50px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.15); font-size: 1.1rem; outline: none; box-sizing: border-box; }
+        main { max-width: 800px; margin: 0 auto; padding: 20px; min-height: 60vh; }
+        .section { display: none; line-height: 1.8; }
         .active { display: block; }
-        .letter-header { font-size: 1.8rem; color: var(--primary); border-bottom: 2px solid var(--accent); margin: 35px 0 15px; display: inline-block; padding-right: 15px; }
+        .letter-header { font-size: 1.8rem; color: var(--primary); border-bottom: 2px solid var(--accent); margin: 30px 0 15px; display: inline-block; }
         .word-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 6px solid var(--primary); }
-        .geez-text { font-size: 1.7rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 5px; }
+        .geez-text { font-size: 1.7rem; font-weight: 700; color: var(--primary); display: block; }
         footer { background: white; padding: 30px; text-align: center; border-top: 1px solid #eee; margin-top: 50px; }
+        .dev-by { font-size: 1.1rem; color: var(--primary); font-weight: bold; }
     </style>
 </head>
 <body>
@@ -35,26 +36,37 @@
 
 <nav>
     <a onclick="showSection('home')">መፈለጊያ</a>
-    <a onclick="showSection('about')">ስለ እኛ</a>
+    <a onclick="showSection('about')">ስለ ፕሮጀክቱ</a>
     <a onclick="showSection('privacy')">Privacy Policy</a>
 </nav>
 
 <main>
+    <!-- መፈለጊያ ክፍል -->
     <div id="home" class="section active">
-        <div class="search-area"><input type="text" id="searchInput" class="search-box" placeholder="የግዕዝ ቃል ይፈልጉ..."></div>
+        <div class="search-area">
+            <input type="text" id="searchInput" class="search-box" placeholder="የግዕዝ ቃል ይፈልጉ..." autocomplete="off">
+        </div>
         <div id="results"></div>
     </div>
+
+    <!-- ስለ ፕሮጀክቱ -->
     <div id="about" class="section">
-        <h2>ስለ መጽሐፈ ሰዋስው ወግሥ</h2>
-        <p>Developed by Deacon Kewen Dejen</p>
+        <h2 style="color: var(--primary);">ስለ መጽሐፈ ሰዋስው ወግሥ</h2>
+        <p>ይህ ድረ-ገጽ የግዕዝ ቋንቋን ሥርዓት፣ ሰዋስው እና መዝገበ ቃላት ከመጽሐፍ ቅዱስ ጥቅሶች ጋር በማዛመድ ለተማሪዎችና ለምዕመናን ለማቅረብ የታለመ ነው።</p>
+        <p><b>ተረካቢና አዘጋጅ:</b> Deacon Kewen Dejen</p>
     </div>
+
+    <!-- Privacy Policy (ለ AdSense ግዴታ ነው) -->
     <div id="privacy" class="section">
-        <h2>Privacy Policy</h2>
-        <p>This site uses cookies for Google AdSense to serve ads.</p>
+        <h2 style="color: var(--primary);">Privacy Policy</h2>
+        <p>Your privacy is important to us. This website uses Google AdSense to display advertisements. AdSense uses cookies to provide a better user experience. No personal data is collected or stored on this site.</p>
     </div>
 </main>
 
-<footer>Developed by Deacon Kewen Dejen &copy; 2025</footer>
+<footer>
+    <div class="dev-by">Developed by Deacon Kewen Dejen</div>
+    <div style="font-size: 0.85rem; color: #999; margin-top: 10px;">&copy; 2025 መጽሐፈ ሰዋስው ወግሥ ፕሮጀክት | መብቱ የተጠበቀ ነው</div>
+</footer>
 
 <script>
 
@@ -179,9 +191,9 @@
         const results = document.getElementById('results');
         results.innerHTML = '';
         const grouped = data.reduce((acc, item) => {
-            const l = item.l || 'ሌሎች';
-            if (!acc[l]) acc[l] = [];
-            acc[l].push(item);
+            const letter = item.l || 'ሌሎች';
+            if (!acc[letter]) acc[letter] = [];
+            acc[letter].push(item);
             return acc;
         }, {});
         Object.keys(grouped).sort().forEach(letter => {
