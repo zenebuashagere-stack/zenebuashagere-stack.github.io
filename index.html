@@ -1,1 +1,177 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መጽሐፈ ሰዋስው ወግሥ - ዲጂታል እትም</title>
 
+    <!-- የ Google AdSense ኮድ - በትክክለኛው ቦታ ተቀምጧል -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764197307756069" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1b4332; --accent: #d4a373; --bg: #fcfaf5; --text: #2d3436; --card: #ffffff; }
+        body { font-family: 'Noto Sans Ethiopic', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
+        header { background: var(--primary); color: white; padding: 50px 20px; text-align: center; border-bottom: 5px solid var(--accent); }
+        nav { background: #122b21; padding: 12px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-size: 0.95rem; cursor: pointer; font-weight: bold; }
+        .search-area { max-width: 600px; margin: -30px auto 20px; padding: 0 20px; position: relative; z-index: 100; }
+        .search-box { width: 100%; padding: 18px 25px; border-radius: 50px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.15); font-size: 1.1rem; outline: none; box-sizing: border-box; }
+        main { max-width: 800px; margin: 0 auto; padding: 20px; min-height: 70vh; }
+        .section { display: none; animation: fadeIn 0.4s ease; }
+        .active { display: block; }
+        .letter-header { font-size: 1.8rem; color: var(--primary); border-bottom: 3px solid var(--accent); margin: 35px 0 15px; display: inline-block; padding-right: 20px; }
+        .word-card { background: var(--card); border-radius: 15px; padding: 25px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .geez-text { font-size: 1.8rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 8px; }
+        .meaning-text { font-size: 1.15rem; line-height: 1.8; color: #333; text-align: justify; }
+        .type-tag { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 3px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 10px; }
+        footer { background: white; padding: 40px 20px; text-align: center; border-top: 1px solid #eee; margin-top: 60px; }
+        .dev-by { font-size: 1.2rem; color: var(--primary); font-weight: bold; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 600px) { header h1 { font-size: 1.8rem; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>መጽሐፈ ሰዋስው ወግሥ</h1>
+    <p>ዲጂታል የግዕዝ መዝገበ ቃላትና ሰዋስው</p>
+</header>
+
+<nav>
+    <a onclick="showSection('home')">መፈለጊያ</a>
+    <a onclick="showSection('about')">ስለ ፕሮጀክቱ</a>
+    <a onclick="showSection('privacy')">Privacy Policy</a>
+</nav>
+
+<main>
+    <div id="home" class="section active">
+        <div class="search-area">
+            <input type="text" id="searchInput" class="search-box" placeholder="የግዕዝ ቃል ወይም ትርጉም ይፈልጉ..." autocomplete="off">
+        </div>
+        <div id="results"></div>
+    </div>
+
+    <div id="about" class="section">
+        <h2 style="color: var(--primary);">ስለ መጽሐፈ ሰዋስው ወግሥ</h2>
+        <p>ይህ ድረ-ገጽ የቤተክርስቲያንን ሀብት የሆነውን የግዕዝ ቋንቋ ሥርዓት፣ ሰዋስው እና መዝገበ ቃላት ከመጽሐፍ ቅዱስ ጥቅሶች ጋር በማዛመድ በዘመናዊ መንገድ ለማቅረብ የታለመ ነው።</p>
+        <p><b>ተረካቢና አዘጋጅ (Developer):</b> Deacon Kewen Dejen</p>
+    </div>
+
+    <div id="privacy" class="section">
+        <h2 style="color: var(--primary);">Privacy Policy</h2>
+        <p>Welcome to መጽሐፈ ሰዋስው ወግሥ. This website uses Google AdSense to display advertisements. AdSense uses cookies to serve ads based on your prior visits to this or other websites. We do not collect or store any personal data. By using this site, you agree to our educational mission.</p>
+    </div>
+</main>
+
+<footer>
+    <div class="dev-by">Developed by Deacon Kewen Dejen</div>
+    <div style="font-size: 0.85rem; color: #999; margin-top: 12px;">&copy; 2025 መጽሐፈ ሰዋስው ወግሥ ፕሮጀክት | መብቱ የተጠበቀ ነው</div>
+</footer>
+
+<script>
+    const dictionary = [
+        // --- ሀ ---
+        { g: "ሀለወ", t: "ግሥ", m: "ትርጓሜሁ - ነበረ፣ ኖረ። ጥቅስ - 'ወሀለወ ቃል ውስተ ሰማይ' (፩ዮሐ ፭፡፯)", l: "ሀ" },
+        { g: "ሀለየ", t: "ግሥ", m: "ትርጓሜሁ - አሰበ፣ አሰላሰለ። ጥቅስ - 'ሀለየ በልቡ' (መዝ ፲፫፡፩)", l: "ሀ" },
+        { g: "ሀገረ", t: "ስም", m: "ትርጓሜሁ - አገር፣ ከተማ። ጥቅስ - 'ሀገረ ቅድስት' (ራእይ ፳፩፡፪)", l: "ሀ" },
+        // --- ለ ---
+        { g: "ለብሰ", t: "ግሥ", m: "ትርጓሜሁ - ለበሰ። ጥቅስ - 'ወአልበስዎ ልብሰ ሜላት' (ማቴ ፳፯፡፳፰)", l: "ለ" },
+        { g: "ለሐወ", t: "ግሥ", m: "ትርጓሜሁ - አለቀሰ። ጥቅስ - 'ለሐወት ማርያም' (ዮሐ ፲፩፡፴፩)", l: "ለ" },
+        // --- ሐ ---
+        { g: "ሐረሰ", t: "ግሥ", m: "ትርጓሜሁ - አረሰ። ጥቅስ - 'ዘየሐርስ ይትሜነይ' (፩ቆሮ ፱፡፲)", l: "ሐ" },
+        { g: "ሐነጸ", t: "ግሥ", m: "ትርጓሜሁ - ሰራ። ጥቅስ - 'ሐነጸት ጥበብ ቤታ' (ምሳ ፱፡፩)", l: "ሐ" },
+        // --- መ ---
+        { g: "መሐረ", t: "ግሥ", m: "ትርጓሜሁ - አስተማረ። ጥቅስ - 'መሐሮሙ በምሳሌ' (ማር ፬፡፪)", l: "መ" },
+        { g: "መጽአ", t: "ግሥ", m: "ትርጓሜሁ - መጣ። ጥቅስ - 'መጽአ ወልደ ዕጓለ እመሕያው' (ማቴ ፲፰፡፲፩)", l: "መ" },
+        // --- ሠ ---
+        { g: "ሤጠ", t: "ግሥ", m: "ትርጓሜሁ - ሸጠ። ጥቅስ - 'ወሤጥዎ ለዮሴፍ' (ዘፍ ፴፯፡፳፰)", l: "ሠ" },
+        { g: "ሠርዓ", t: "ግሥ", m: "ትርጓሜሁ - ሰራ፣ ደነገገ። ጥቅስ - 'ሠርዓ ሕገ' (መዝ ፻፵፯፡፲፱)", l: "ሠ" },
+        // --- ረ ---
+        { g: "ረከበ", t: "ግሥ", m: "ትርጓሜሁ - አገኘ። ጥቅስ - 'ዘየኃሥሥ ይረክብ' (ማቴ ፯፡፰)", l: "ረ" },
+        { g: "ረድአ", t: "ግሥ", m: "ትርጓሜሁ - ረዳ። ጥቅስ - 'ረድአኒ እግዚኦ' (መዝ ፻፲፰፡፻፸፭)", l: "ረ" },
+        // --- ሰ ---
+        { g: "ሰአለ", t: "ግሥ", m: "ትርጓሜሁ - ለመነ። ጥቅስ - 'ሰአሉ ወይትወሀብ ለክሙ' (ማቴ ፯፡፯)", l: "ሰ" },
+        { g: "ሰበከ", t: "ግሥ", m: "ትርጓሜሁ - አስተማረ። ጥቅስ - 'ሰበኩ ወንጌለ' (ማር ፲፮፡፲፭)", l: "ሰ" },
+        // --- ቀ ---
+        { g: "ቀተለ", t: "ግሥ", m: "ትርጓሜሁ - ገደለ። ጥቅስ - 'ኢትቅትል' (ዘጸ ፳፡፲፫)", l: "ቀ" },
+        { g: "ቀደሰ", t: "ግሥ", m: "ትርጓሜሁ - ለየ። ጥቅስ - 'ቀድሶሙ በጽድቅከ' (ዮሐ ፲፯፡፲፯)", l: "ቀ" },
+        // --- በ ---
+        { g: "በልዐ", t: "ግሥ", m: "ትርጓሜሁ - በላ። ጥቅስ - 'ብልዑ ዝንቱ ውእቱ ሥጋየ' (ማቴ ፳፮፡፳፮)", l: "በ" },
+        { g: "በጽሐ", t: "ግሥ", m: "ትርጓሜሁ - ደረሰ። ጥቅስ - 'በጽሐ ጊዜሁ' (ማር ፩፡፲፭)", l: "በ" },
+        // --- ተ ---
+        { g: "ተንሥአ", t: "ግሥ", m: "ትርጓሜሁ - ተነሳ። ጥቅስ - 'ተንሥአ እግዚአብሔር' (መዝ ፸፯፡፷፭)", l: "ተ" },
+        // --- ኀ ---
+        { g: "ኀደረ", t: "ግሥ", m: "ትርጓሜሁ - አደረ። ጥቅስ - 'ቃል ሥጋ ኮነ' (ዮሐ ፩፡፲፬)", l: "ኀ" },
+        // --- ነ ---
+        { g: "ነገረ", t: "ግሥ", m: "ትርጓሜሁ - ተናገረ። ጥቅስ - 'ነገረ ጽድቅ ይነብብ' (ምሳ ፰፡፯)", l: "ነ" },
+        // --- አ ---
+        { g: "አእመረ", t: "ግሥ", m: "ትርጓሜሁ - አወቀ። ጥቅስ - 'ወአእመረ አዳም ለሔዋን' (ዘፍ ፬፡፩)", l: "አ" },
+        { g: "አዕረፈ", t: "ግሥ", m: "ትርጓሜሁ - አረፈ። ጥቅስ - 'አዕረፈ እግዚአብሔር በሳብዕ ዕለት' (ዘፍ ፪፡፪)", l: "አ" },
+        // --- ከ ---
+        { g: "ከሠተ", t: "ግሥ", m: "ትርጓሜሁ - ገለጠ። ጥቅስ - 'ከሠተ ሎሙ አእምሮቶሙ' (ሉቃ ፳፬፡፵፭)", l: "ከ" },
+        // --- ወ ---
+        { g: "ወለደ", t: "ግሥ", m: "ትርጓሜሁ - ወለደ። ጥቅስ - 'አብርሃም ወለዶ ለይስሐቅ' (ማቴ ፩፡፪)", l: "ወ" },
+        // --- ዐ ---
+        { g: "ዐቀበ", t: "ግሥ", m: "ትርጓሜሁ - ጠበቀ። ጥቅስ - 'ዕቀብ ሕግየ' (ምሳ ፯፡፪)", l: "ዐ" },
+        // --- ዘ ---
+        { g: "ዘመረ", t: "ግሥ", m: "ትርጓሜሁ - አመሰገነ። ጥቅስ - 'ዘምሩ ለእግዚአብሔር' (መዝ ፱፡፲፩)", l: "ዘ" },
+        // --- የ ---
+        { g: "የማን", t: "ስም", m: "ትርጓሜሁ - ቀኝ። ጥቅስ - 'ይቀውም እምየማኑ' (መዝ ፻፱፡፩)", l: "የ" },
+        // --- ደ ---
+        { g: "ደለወ", t: "ግሥ", m: "ትርጓሜሁ - ተገባ። ጥቅስ - 'ደለወ ይከውን' (ፍትሐ ነገሥት)", l: "ደ" },
+        // --- ገ ---
+        { g: "ገብረ", t: "ግሥ", m: "ትርጓሜሁ - ሰራ። ጥቅስ - 'ገብረ እግዚአብሔር ሰማየ' (ዘፍ ፩፡፩)", l: "ገ" },
+        // --- ጠ ---
+        { g: "ጠየቀ", t: "ግሥ", m: "ትርጓሜሁ - መረመረ። ጥቅስ - 'ጠየቀ እምኔሆሙ ጊዜሃ ለኮከብ' (ማቴ ፪፡፯)", l: "ጠ" },
+        // --- ጰ ---
+        { g: "ጰራቅሊጦስ", t: "ስም", m: "ትርጓሜሁ - ናዛዚ። ጥቅስ - 'ወካልአ ጰራቅሊጦስ ይፌኑ' (ዮሐ ፲፬፡፲፮)", l: "ጰ" },
+        // --- ጸ ---
+        { g: "ጸለየ", t: "ግሥ", m: "ትርጓሜሁ - ለመነ። ጥቅስ - 'አንትሙሰ ሶበ ትጸልዩ' (ማቴ ፮፡፱)", l: "ጸ" },
+        // --- ፀ ---
+        { g: "ፀሐይ", t: "ስም", m: "ትርጓሜሁ - ብርሃን ሰጪ። ጥቅስ - 'ወይበርቁ ጻድቃን ከመ ፀሐይ' (ማቴ ፲፫፡፵፫)", l: "ፀ" },
+        // --- ፈ ---
+        { g: "ፈጠረ", t: "ግሥ", m: "ትርጓሜሁ - ፈጠረ። ጥቅስ - 'በቀዳሚ ገብረ እግዚአብሔር' (ዘፍ ፩፡፩)", l: "ፈ" }
+    ];
+
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    function render(data) {
+        const results = document.getElementById('results');
+        results.innerHTML = '';
+        if (data.length === 0) {
+            results.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">ምንም ውጤት አልተገኘም...</p>';
+            return;
+        }
+        const grouped = data.reduce((acc, item) => {
+            const letter = item.l || 'ሌሎች';
+            if (!acc[letter]) acc[letter] = [];
+            acc[letter].push(item);
+            return acc;
+        }, {});
+        Object.keys(grouped).sort().forEach(letter => {
+            const section = document.createElement('div');
+            section.innerHTML = `<div class="letter-header">${letter}</div>`;
+            grouped[letter].forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'word-card';
+                card.innerHTML = `<div class="type-tag">${item.t}</div><div class="geez-text">${item.g}</div><div class="meaning-text">${item.m}</div>`;
+                section.appendChild(card);
+            });
+            results.appendChild(section);
+        });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', e => {
+        const q = e.target.value.trim();
+        const f = dictionary.filter(i => i.g.includes(q) || i.m.includes(q));
+        render(f);
+    });
+
+    render(dictionary);
+</script>
+</body>
+</html>
