@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>መጽሐፈ ሰዋስው ወግሥ - ዲያቆን ከውን ደጀን</title>
+    
+    <!-- SEO - ጎግል ላይ መጀመሪያ እንዲመጣ -->
+    <meta name="description" content="መጽሐፈ ሰዋስው ወግሥ - ጥንታዊ የግዕዝ መዝገበ ቃላትና ሰዋስው ከመጽሐፍ ቅዱስ ጥቅሶች ጋር። በዲያቆን ከውን ደጀን የተዘጋጀ።">
+    <meta name="keywords" content="ግዕዝ, ሰዋስው, መዝገበ ቃላት, ኦርቶዶክስ, Geez Dictionary, Ethiopia">
 
-    <!-- Google AdSense Code -->
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764197307756069" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #1b4332; --accent: #d4a373; --bg: #fcfaf5; --text: #2d3436; --card: #ffffff; }
+        :root { --primary: #1b4332; --accent: #d4a373; --bg: #fcfaf5; --text: #2d3436; }
         body { font-family: 'Noto Sans Ethiopic', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
         header { background: var(--primary); color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid var(--accent); }
-        nav { background: #122b21; padding: 12px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        nav { background: #122b21; padding: 12px; text-align: center; position: sticky; top: 0; z-index: 1000; }
         nav a { color: white; margin: 0 15px; text-decoration: none; font-size: 0.95rem; cursor: pointer; font-weight: bold; }
         .search-area { max-width: 600px; margin: -30px auto 20px; padding: 0 20px; position: relative; z-index: 100; }
         .search-box { width: 100%; padding: 20px 30px; border-radius: 50px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.15); font-size: 1.1rem; outline: none; box-sizing: border-box; }
@@ -21,11 +25,16 @@
         .section { display: none; }
         .active { display: block; }
         .letter-header { font-size: 2rem; color: var(--primary); border-bottom: 3px solid var(--accent); margin: 40px 0 20px; display: inline-block; padding-right: 20px; }
-        .word-card { background: var(--card); border-radius: 15px; padding: 25px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); transition: 0.3s; }
-        .word-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .word-card { background: white; border-radius: 15px; padding: 25px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); position: relative; }
         .geez-text { font-size: 1.8rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 8px; }
-        .meaning-text { font-size: 1.2rem; line-height: 1.8; color: #333; text-align: justify; }
-        .type-tag { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 3px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 10px; }
+        .meaning-text { font-size: 1.15rem; line-height: 1.8; color: #333; }
+        
+        /* ማጋሪያ ቁልፍ */
+        .share-btn { margin-top: 10px; background: #f0f0f0; border: none; padding: 5px 12px; border-radius: 5px; font-size: 0.8rem; cursor: pointer; color: var(--primary); }
+        
+        /* ወደ ላይ መመለሻ ቁልፍ */
+        #backToTop { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 50%; cursor: pointer; display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        
         footer { background: white; padding: 40px 20px; text-align: center; border-top: 1px solid #eee; margin-top: 60px; }
         .dev-by { font-size: 1.2rem; color: var(--primary); font-weight: bold; }
     </style>
@@ -39,29 +48,36 @@
 
 <nav>
     <a onclick="showSection('home')">መፈለጊያ</a>
-    <a onclick="showSection('about')">ስለ ፕሮጀክቱ</a>
-    <a onclick="showSection('privacy')">Privacy Policy</a>
+    <a onclick="showSection('about')">ስለ እኛ</a>
+    <a onclick="showSection('contact')">አስተያየት</a>
+    <a onclick="showSection('privacy')">Privacy</a>
 </nav>
 
 <main>
     <div id="home" class="section active">
-        <div class="search-area">
-            <input type="text" id="searchInput" class="search-box" placeholder="የግዕዝ ቃል ወይም ትርጉም ይፈልጉ..." autocomplete="off">
-        </div>
+        <div class="search-area"><input type="text" id="searchInput" class="search-box" placeholder="የግዕዝ ቃል ይፈልጉ..." autocomplete="off"></div>
         <div id="results"></div>
     </div>
 
     <div id="about" class="section">
-        <h2 style="color: var(--primary);">ስለ መጽሐፈ ሰዋስው ወግሥ</h2>
+        <h2>ስለ መጽሐፈ ሰዋስው ወግሥ</h2>
         <p>ይህ ድረ-ገጽ የቤተክርስቲያንን ሀብት የሆነውን የግዕዝ ቋንቋ ሥርዓት፣ ሰዋስው እና መዝገበ ቃላት ከመጽሐፍ ቅዱስ ጥቅሶች ጋር በማዛመድ በዘመናዊ መንገድ ለማቅረብ የታለመ ነው።</p>
-        <p><b>ተረካቢና አዘጋጅ (Developer):</b> Deacon Kewen Dejen</p>
+        <p><b>ተረካቢና አዘጋጅ:</b> Deacon Kewen Dejen</p>
+    </div>
+
+    <div id="contact" class="section">
+        <h2>አስተያየት ይላኩ</h2>
+        <p>ማንኛውም ጥያቄ ወይም አስተያየት ካለዎት በሚከተለው ኢሜይል ያግኙን፦</p>
+        <p>📧 <b>Email: deacon.kewen@example.com</b></p>
     </div>
 
     <div id="privacy" class="section">
-        <h2 style="color: var(--primary);">Privacy Policy</h2>
-        <p>This website uses Google AdSense to serve ads. AdSense uses cookies to provide a better user experience. No personal identification data is collected or stored on this site.</p>
+        <h2>Privacy Policy</h2>
+        <p>This website uses Google AdSense to serve ads. We value your privacy and do not collect personal data.</p>
     </div>
 </main>
+
+<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
 <footer>
     <div class="dev-by">Developed by Deacon Kewen Dejen</div>
@@ -228,10 +244,6 @@
     function render(data) {
         const results = document.getElementById('results');
         results.innerHTML = '';
-        if (data.length === 0) {
-            results.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">ምንም ውጤት አልተገኘም...</p>';
-            return;
-        }
         const grouped = data.reduce((acc, item) => {
             const letter = item.l || 'ሌሎች';
             if (!acc[letter]) acc[letter] = [];
@@ -244,11 +256,17 @@
             grouped[letter].forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'word-card';
-                card.innerHTML = `<div class="type-tag">${item.t}</div><div class="geez-text">${item.g}</div><div class="meaning-text">${item.m}</div>`;
+                card.innerHTML = `<div class="geez-text">${item.g}</div><div>${item.m}</div>
+                <button class="share-btn" onclick="shareWord('${item.g}', '${item.m}')">Telegram Share</button>`;
                 section.appendChild(card);
             });
             results.appendChild(section);
         });
+    }
+
+    function shareWord(word, meaning) {
+        const text = encodeURIComponent(`ቃል: ${word}\nትርጉም: ${meaning}\n\nተጨማሪ በ: ${window.location.href}`);
+        window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`);
     }
 
     document.getElementById('searchInput').addEventListener('input', e => {
@@ -257,7 +275,16 @@
         render(f);
     });
 
-    window.onload = () => render(dictionary);
+    window.onscroll = function() {
+        const btn = document.getElementById("backToTop");
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+    };
+
+    render(dictionary);
 </script>
 </body>
 </html>
