@@ -145,7 +145,6 @@
 <footer>Developed by Deacon Kewen Dejen &copy; 2025</footer>
 
 <script>
-    // --- የታረመና የተስተካከለ የቃላት ዳታ እዚህ ይገባል ---
     const dictionary = [
         { g: "ሀለወ", t: "ግሥ", m: "ትርጓሜሁ - ነበረ፣ ኖረ። ጥቅስ - 'ወሀለወ ቃል ውስተ ሰማይ' (፩ዮሐ ፭፡፯)", l: "ሀ" },
         { g: "ኅለየ", t: "ግሥ", m: "ትርጓሜሁ - አሰበ፣ አሰላሰለ። ጥቅስ - 'ሀለየ በልቡ' (መዝ ፲፫፡፩)", l: "ሀ" },
@@ -332,9 +331,9 @@
         { g: "ሀደመ", t: "ግሥ", m: "ትርጓሜሁ - አንቀላፋ፣ ተኛ።", l: "ሀ" },
         { g: "ሀገረ ፡ ገነት", t: "ስም", m: "ትርጓሜሁ - የደስታ አገር።", l: "ሀ" },
         { g: "ለጐመ", t: "ግሥ", m: "ትርጓሜሁ - አፋቸውን ያዘ፣ ገታ። ጥቅስ - 'ለጐመ አፈ አናብስት' (ታሪክ)", l: "ለ" },
-        { g: "ለበወ", t: "ግሥ", m: "ትርጓሜሁ - አስተዋለ፣ አወቀ። ጥቅስ - 'ለብዉ ከመ እግዚአብሔር ውእቱ' (መዝ ፵፭፡፲)", l: "ለ" }
+        { g: "ለበወ", t: "ግሥ", m: "ትርጓሜሁ - አስተዋለ፣ አወቀ። ጥቅስ - 'ለብዉ ከመ እግዚአብሔር ውእቱ' (መዝ ፵፭፡፲)", l: "ለ" },
         { g: "ለሐሰ", t: "ግሥ", m: "ትርጓሜሁ - ላሰ።", l: "ለ" },
-        { g: "ለቅሐ", t: "ግሥ", m: "ትርጓሜሁ - አበደረ። ጥቅስ - 'ለዘይለትሌቃሕ ኢትሚጥ ገጸከ' (ማቴ ፭፡፵፪)", l: "ለ" }
+        { g: "ለቅሐ", t: "ግሥ", m: "ትርጓሜሁ - አበደረ። ጥቅስ - 'ለዘይለቅሕ ኢትሚጥ ገጸከ' (ማቴ ፭፡፵፪)", l: "ለ" },
         { g: "ሐሰ", t: "ግሥ", m: "ትርጓሜሁ - ዋሸ፣ ካደ።", l: "ሐ" },
         { g: "ሐለበ", t: "ግሥ", m: "ትርጓሜሁ - አለበ (ወተት)። ጥቅስ - 'ሐለበ ሐሊበ' ()", l: "ሐ" },
         { g: "ሐወጸ", t: "ግሥ", m: "ትርጓሜሁ - ጎበኘ፣ አየ። ጥቅስ - 'ሐወጸነ እምአርያም' (፡)", l: "ሐ" },
@@ -374,24 +373,34 @@
     function render(data) {
         const results = document.getElementById('results');
         results.innerHTML = '';
-        data.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'word-card';
-            card.innerHTML = `
-                <span class="geez-text">${item.g}</span>
-                <div class="meaning-text">${item.m}</div>
-                <div class="btn-group">
-                    <button class="btn btn-copy" onclick="copyWord('${item.g}', '${item.m}')">Copy</button>
-                    <button class="btn btn-share" onclick="shareTelegram('${item.g}', '${item.m}')">Telegram Share</button>
-                </div>
-            `;
-            results.appendChild(card);
+        const grouped = data.reduce((acc, item) => {
+            const letter = item.l || 'ሌሎች';
+            if (!acc[letter]) acc[letter] = [];
+            acc[letter].push(item);
+            return acc;
+        }, {});
+
+        Object.keys(grouped).sort().forEach(letter => {
+            const section = document.createElement('div');
+            section.innerHTML = `<div style="font-size:1.5rem; color:var(--primary); border-bottom:2px solid var(--accent); margin:20px 0;">${letter}</div>`;
+            grouped[letter].forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'word-card';
+                card.innerHTML = `
+                    <span class="geez-text">${item.g}</span>
+                    <div class="meaning-text">${item.m}</div>
+                    <div class="btn-group">
+                        <button class="btn btn-copy" onclick="copyWord('${item.g}', '${item.m}')">Copy</button>
+                        <button class="btn btn-share" onclick="shareTelegram('${item.g}', '${item.m}')">Telegram Share</button>
+                    </div>`;
+                section.appendChild(card);
+            });
+            results.appendChild(section);
         });
     }
 
     function copyWord(g, m) {
-        const text = `${g}: ${m}\nተጨማሪ በ: ${window.location.href}`;
-        navigator.clipboard.writeText(text).then(() => alert("ኮፒ ተደርጓል!"));
+        navigator.clipboard.writeText(`${g}: ${m}\nተጨማሪ በ: ${window.location.href}`).then(() => alert("ኮፒ ተደርጓል!"));
     }
 
     function shareTelegram(g, m) {
@@ -413,7 +422,6 @@
     }
 
     document.getElementById('searchInput').addEventListener('input', e => filterWords(e.target.value));
-
     window.onload = () => { setDailyWord(); render(dictionary); };
 </script>
 </body>
