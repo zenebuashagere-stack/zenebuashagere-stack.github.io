@@ -413,27 +413,17 @@
         { g: "ፈጣሬ ፡ ብርሃናት", t: "ስም", m: "ትርጓሜሁ - የብርሃናት ፈጣሪ።", l: "ፈ" }
     ];
 
-    // ፊደላት Scroller መፍጠሪያ
-    const letters = ["ሀ", "ለ", "ሐ", "መ", "ሠ", "ረ", "ሰ", "ቀ", "በ", "ተ", "ኀ", "ነ", "አ", "ከ", "ወ", "ዐ", "ዘ", "የ", "ደ", "ገ", "ጠ", "ጰ", "ጸ", "ፀ", "ፈ", "ፐ"];
-    const alphaList = document.getElementById('alphabetList');
-    letters.forEach(L => {
-        const span = document.createElement('span');
-        span.innerText = L;
-        span.onclick = () => { document.getElementById('searchInput').value = L; filterWords(L); };
-        alphaList.appendChild(span);
-    });
+    let currentFilter = 'all';
 
-    function toggleTheme() {
-        const body = document.body;
-        body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    // መደጋገምን የሚያጠፋ ፈንክሽን
+    function getUniqueWords(data) {
+        const unique = [];
+        const seen = new Set();
+        data.forEach(item => { if (!seen.has(item.g)) { seen.add(item.g); unique.push(item); } });
+        return unique;
     }
 
-    function setDailyWord() {
-        const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-        const word = dictionary[dayOfYear % dictionary.length];
-        document.getElementById('dw-geez').innerText = word.g;
-        document.getElementById('dw-meaning').innerText = word.m;
-    }
+    const cleanDictionary = getUniqueWords(dictionaryData);
 
     function render(data) {
         const results = document.getElementById('results');
@@ -451,30 +441,46 @@
             grouped[letter].forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'word-card';
+                const tagColor = item.cat === 'ባለቤት' ? '#e3f2fd' : '#fff3e0';
+                const textColor = item.cat === 'ባለቤት' ? '#1565c0' : '#ef6c00';
                 card.innerHTML = `
+                    <span class="tag" style="background:${tagColor}; color:${textColor}">${item.cat}</span>
                     <span class="geez-text">${item.g}</span>
                     <div class="meaning-text">${item.m}</div>
-                    <div class="btn-group">
-                        <button class="btn btn-copy" onclick="copyWord('${item.g}', '${item.m}')">Copy</button>
-                        <button class="btn btn-share" onclick="shareTelegram('${item.g}', '${item.m}')">Telegram Share</button>
-                    </div>`;
+                `;
                 section.appendChild(card);
             });
             results.appendChild(section);
         });
     }
 
-    function copyWord(g, m) {
-        navigator.clipboard.writeText(`${g}: ${m}\nተጨማሪ በ: ${window.location.href}`).then(() => alert("ኮፒ ተደርጓል!"));
+    function setFilter(cat, btn) {
+        currentFilter = cat;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilters();
     }
 
-    function shareTelegram(g, m) {
-        const text = encodeURIComponent(`📜 *የግዕዝ ቃል:* ${g}\n📖 *ትርጉም:* ${m}\n\n🔗 ድረ-ገጻችን: ${window.location.href}`);
-        window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`);
+    function applyFilters() {
+        const q = document.getElementById('searchInput').value.trim();
+        let f = cleanDictionary;
+        if (currentFilter !== 'all') f = f.filter(i => i.cat === currentFilter);
+        if (q) f = f.filter(i => i.g.includes(q) || i.m.includes(q));
+        render(f);
     }
 
-    function filterWords(q) {
-        render(dictionary.filter(i => i.g.includes(q) || i.m.includes(q)));
+    const letters = ["ሀ", "ለ", "ሐ", "መ", "ሠ", "ረ", "ሰ", "ቀ", "በ", "ተ", "ኀ", "ነ", "አ", "ከ", "ወ", "ዐ", "ዘ", "የ", "ደ", "ገ", "ጠ", "ጰ", "ጸ", "ፀ", "ፈ", "ፐ"];
+    const alphaList = document.getElementById('alphabetList');
+    letters.forEach(L => {
+        const span = document.createElement('span');
+        span.innerText = L;
+        span.onclick = () => { document.getElementById('searchInput').value = L; applyFilters(); };
+        alphaList.appendChild(span);
+    });
+
+    function toggleTheme() {
+        const body = document.body;
+        body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     }
 
     function showSection(id) {
@@ -482,12 +488,27 @@
         document.getElementById(id).classList.add('active-section');
         document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
         document.getElementById('nav-' + id).classList.add('active');
-        if(id !== 'home') document.getElementById('dailyWordCard').style.display = 'none';
-        else document.getElementById('dailyWordCard').style.display = 'block';
+        if(id !== 'home') {
+            document.getElementById('dailyWordCard').style.display = 'none';
+            document.getElementById('alphabetList').style.display = 'none';
+            document.querySelector('.filter-group').style.display = 'none';
+        } else {
+            document.getElementById('dailyWordCard').style.display = 'block';
+            document.getElementById('alphabetList').style.display = 'flex';
+            document.querySelector('.filter-group').style.display = 'flex';
+        }
+        window.scrollTo(0,0);
     }
 
-    document.getElementById('searchInput').addEventListener('input', e => filterWords(e.target.value));
-    window.onload = () => { setDailyWord(); render(dictionary); };
+    function setDailyWord() {
+        const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+        const word = cleanDictionary[dayOfYear % cleanDictionary.length];
+        document.getElementById('dw-geez').innerText = word.g;
+        document.getElementById('dw-meaning').innerText = word.m;
+    }
+
+    document.getElementById('searchInput').addEventListener('input', applyFilters);
+    window.onload = () => { setDailyWord(); render(cleanDictionary); };
 </script>
 </body>
 </html>
