@@ -11,46 +11,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --primary: #1b4332; --accent: #d4a373; --bg: #fcfaf5; --card: #ffffff; --text: #2d3436; 
+            --primary: #1b4332; --accent: #d4a373; --bg: #fcfaf5; --card: #ffffff; --text: #2d3436; --nav-bg: #122b21;
             --syn-bg: #e8f5e9; --syn-text: #2e7d32; 
             --ant-bg: #ffebee; --ant-text: #c62828;
             --ex-bg: #e3f2fd; --ex-text: #1565c0;
         }
-        [data-theme="dark"] { --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; }
+        [data-theme="dark"] { --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; --nav-bg: #000000; }
         
         body { font-family: 'Noto Sans Ethiopic', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding-bottom: 90px; transition: 0.3s; }
         header { background: var(--primary); color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid var(--accent); position: relative; }
-        .theme-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; }
+        .theme-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: none; color: white; padding: 8px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        
+        .daily-card { background: linear-gradient(135deg, #1b4332, #2d6a4f); color: white; padding: 25px; border-radius: 20px; margin: -40px auto 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); text-align: center; }
         
         .alphabet-list { display: flex; overflow-x: auto; background: var(--card); padding: 10px; gap: 10px; position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 10px rgba(0,0,0,0.1); scrollbar-width: none; }
         .alphabet-list::-webkit-scrollbar { display: none; }
-        .alphabet-list span { padding: 8px 15px; background: var(--bg); border-radius: 10px; cursor: pointer; font-weight: bold; color: var(--primary); border: 1px solid #eee; }
+        .alphabet-list span { padding: 8px 15px; background: var(--bg); border-radius: 10px; cursor: pointer; font-weight: bold; color: var(--primary); border: 1px solid #eee; white-space: nowrap; }
 
         .filter-group { display: flex; justify-content: center; gap: 8px; margin: 20px 0; }
         .filter-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; font-size: 0.85rem; font-weight: bold; }
         .filter-btn.active { background: var(--primary); color: white; }
 
-        .search-box { width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #ddd; font-size: 16px; outline: none; background: var(--card); color: var(--text); }
-        
-        .word-card { background: var(--card); border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .search-box { width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #ddd; font-size: 16px; outline: none; background: var(--card); color: var(--text); margin-top: 10px; }
+        .word-card { background: var(--card); border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 10px solid var(--primary); position: relative; }
         .geez-text { font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
         
-        /* መለያዎች (Tags) */
         .tag { display: inline-block; padding: 2px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; margin-bottom: 10px; margin-right: 5px; }
-        .pos-tag { background: #f0f0f0; color: #555; }
-        .cat-tag { background: #e3f2fd; color: #1565c0; }
-
-        /* ዝርዝር መረጃ ሳጥኖች */
+        
         .detail-box { margin-top: 12px; padding: 12px; border-radius: 10px; font-size: 1rem; line-height: 1.6; }
         .syn-box { background: var(--syn-bg); color: var(--syn-text); border: 1px solid #c8e6c9; }
         .ant-box { background: var(--ant-bg); color: var(--ant-text); border: 1px solid #ffcdd2; }
         .ex-box { background: var(--ex-bg); color: var(--ex-text); border: 1px solid #bbdefb; font-style: italic; }
 
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav-bg); display: flex; justify-content: space-around; padding: 15px 0; z-index: 2000; }
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav-bg); display: flex; justify-content: space-around; padding: 15px 0; z-index: 2000; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); }
         .bottom-nav a { color: #ccc; text-decoration: none; font-size: 0.8rem; text-align: center; cursor: pointer; }
         .bottom-nav a.active { color: var(--accent); font-weight: bold; }
-        
         footer { text-align: center; padding: 30px; font-size: 0.9rem; color: #777; margin-bottom: 80px; }
     </style>
 </head>
@@ -59,13 +55,18 @@
 <header>
     <button class="theme-btn" onclick="toggleTheme()">🌓</button>
     <h1>መጽሐፈ ሰዋስው ወግሥ</h1>
-    <p>በዲያቆን ከውን ደጀን የተዘጋጀ</p>
+    <p>ዲያቆን ከውን ደጀን</p>
 </header>
 
 <div class="alphabet-list" id="alphabetList"></div>
 
 <main class="container">
     <div id="home" class="section active-section">
+        <div class="daily-card" id="dailyWordCard">
+            <small style="opacity: 0.8;">የዕለቱ የግዕዝ ቃል</small>
+            <h2 id="dw-geez">ሀለወ</h2>
+            <p id="dw-meaning">ነበረ፣ ኖረ።</p>
+        </div>
         <div class="filter-group">
             <button class="filter-btn active" onclick="setFilter('all', this)">ሁሉንም</button>
             <button class="filter-btn" onclick="setFilter('ባለቤት', this)">ባለቤት</button>
@@ -84,37 +85,42 @@
 <footer>Developed by Deacon Kewen Dejen &copy; 2025</footer>
 
 <script>
-    // --- ዳታ ማስገቢያ (ሁሉንም የሰዋስው ክፍሎች የያዘ) ---
+    // --- የታረመና የተሟላ የቃላት ዝርዝር (አንድም ሳይዘለል) ---
     const dictionaryData = [
-        { 
-            g: "ሀለወ", 
-            m: "ትርጓሜሁ - ነበረ፣ ኖረ፣ ተገኘ።", 
-            l: "ሀ", 
-            cat: "ባለቤት", 
-            pos: "ግሥ", 
-            syn: "ተረክበ፣ ሀሎ", 
-            ant: "አልቦ፣ ኀጥአ", 
-            ex: "ሀለወ ቃል ውስተ ሰማይ (ቃል በሰማይ ነበረ)" 
-        },
-        { 
-            g: "ቀተለ", 
-            m: "ትርጓሜሁ - ገደለ፣ አጠፋ።", 
-            l: "ቀ", 
-            cat: "ባለቤት", 
-            pos: "ግሥ", 
-            syn: "ቀሠፈ፣ ሐረደ", 
-            ant: "አሕየወ፣ አድኅነ", 
-            ex: "ኢትቅትል ቢጸከ (ባልንጀራህን አትግደል)" 
-        },
-        { 
-            g: "ቀታሊ", 
-            m: "ትርጓሜሁ - ገዳይ፣ አጥፊ።", 
-            l: "ቀ", 
-            cat: "ዘርፍ", 
-            pos: "ስም (ባዕድ)", 
-            ex: "ውእቱ ቀታሊ ውእቱ (እሱ ገዳይ ነው)" 
-        }
-        // እዚህ ጋር አዳዲስ ቃላትን በዚሁ ፎርማት ትጨምራለህ
+        // ሀ
+        { g: "ሀለወ", m: "ትርጓሜሁ - ነበረ፣ ኖረ፣ ተገኘ።", l: "ሀ", cat: "ባለቤት", pos: "ግሥ", syn: "ተረክበ", ant: "አልቦ", ex: "ወሀለወ ቃል ውስተ ሰማይ (፩ዮሐ ፭፡፯)" },
+        { g: "ህልውና", m: "ትርጓሜሁ - መኖር፣ መገኘት፣ ህልው መሆን።", l: "ሀ", cat: "ዘርፍ", pos: "ስም", ex: "ሀለዎቱ ይእቲ ህልውና" },
+        { g: "ሀለየ", m: "ትርጓሜሁ - አሰበ፣ አሰላሰለ፣ አወጠነ።", l: "ሀ", cat: "ባለቤት", pos: "ግሥ", syn: "ተመራመረ", ex: "ሀለየ በልቡ (መዝ ፲፫፡፩)" },
+        { g: "ኅሊና", m: "ትርጓሜሁ - ማሰብ፣ ልቡና፣ አእምሮ።", l: "ሀ", cat: "ዘርፍ", pos: "ስም", ex: "ወይዕቀብ ኅሊናክሙ (ፊል ፬፡፯)" },
+        { g: "ሀገር", m: "ትርጓሜሁ - አገር፣ ከተማ፣ ዓለም።", l: "ሀ", cat: "ዘርፍ", pos: "ስም", ex: "ሀገር ቅድስት (ራእይ ፳፩፡፪)" },
+        // ለ
+        { g: "ለብሰ", m: "ትርጓሜሁ - ለበሰ፣ ተጐናጸፈ።", l: "ለ", cat: "ባለቤት", pos: "ግሥ", ex: "ወአልበስዎ ልብሰ ሜላት (ማቴ ፳፯፡፳፰)" },
+        { g: "ልብስ", m: "ትርጓሜሁ - መጐናጸፊያ፣ ልብስ።", l: "ለ", cat: "ዘርፍ", pos: "ስም", ex: "ልብስከ ጸዓዳ ከመ በረድ" },
+        { g: "ለሐወ", m: "ትርጓሜሁ - አለቀሰ፣ አዘነ፣ ዋየ።", l: "ለ", cat: "ባለቤት", pos: "ግሥ", ex: "ለሐወት ማርያም (ዮሐ ፲፩፡፴፩)" },
+        // ሐ
+        { g: "ሐረሰ", m: "ትርጓሜሁ - አረሰ፣ ገበረ።", l: "ሐ", cat: "ባለቤት", pos: "ግሥ", ex: "ዘየሐርስ ይትሜነይ (፩ቆሮ ፱፡፲)" },
+        { g: "ሐራሲ", m: "ትርጓሜሁ - ገበሬ፣ አራሽ።", l: "ሐ", cat: "ዘርፍ", pos: "ስም (ባዕድ)" },
+        { g: "ሐነጸ", m: "ትርጓሜሁ - ሰራ፣ ገነባ፣ አቆመ።", l: "ሐ", cat: "ባለቤት", pos: "ግሥ", ex: "ሐነጸት ጥበብ ቤታ (ምሳ ፱፡፩)" },
+        { g: "ሐወጸ", m: "ትርጓሜሁ - ጐበኘ፣ አየ፣ ተመለከተ።", l: "ሐ", cat: "ባለቤት", pos: "ግሥ", ex: "ሐወጸነ እምአርያም (ሉቃ ፩፡፸፰)" },
+        // መ
+        { g: "መሐረ", m: "ትርጓሜሁ - አስተማረ፣ ገለጠ።", l: "መ", cat: "ባለቤት", pos: "ግሥ", syn: "ገለጠ", ex: "መሐሮሙ በምሳሌ (ማር ፬፡፪)" },
+        { g: "ትምህርት", m: "ትርጓሜሁ - ዕውቀት፣ ትምህርት።", l: "መ", cat: "ዘርፍ", pos: "ስም", ex: "ወይትለዉ ትምህርተ ሐዋርያት (ሐዋ ፪፡፵፪)" },
+        { g: "መጽአ", m: "ትርጓሜሁ - መጣ፣ ደረሰ።", l: "መ", cat: "ባለቤት", pos: "ግሥ", ant: "ሖረ (ሄደ)", ex: "መጽአ ወልደ ዕጓለ እመሕያው (ማቴ ፲፰፡፲፩)" },
+        // ሠ
+        { g: "ሠርዐ", m: "ትርጓሜሁ - ሠራ፣ ደነገገ፣ ሥርዓት አወጣ።", l: "ሠ", cat: "ባለቤት", pos: "ግሥ", syn: "ደነገገ", ex: "ሠርዓ ሕገ ለሕዝቡ (መዝ ፻፵፯፡፲፱)" },
+        { g: "ሥርዓት", m: "ትርጓሜሁ - ሕግ፣ ደንብ፣ ሥርዓት።", l: "ሠ", cat: "ዘርፍ", pos: "ስም" },
+        // ቀ
+        { g: "ቀተለ", m: "ትርጓሜሁ - ገደለ፣ አጠፋ።", l: "ቀ", cat: "ባለቤት", pos: "ግሥ", syn: "ቀሠፈ", ant: "አሕየወ", ex: "ኢትቅትል ቢጸከ (ዘጸ ፳፡፲፫)" },
+        { g: "ቀታሊ", m: "ትርጓሜሁ - ገዳይ፣ አጥፊ።", l: "ቀ", cat: "ዘርፍ", pos: "ስም (ባዕድ)", ex: "ውእቱ ቀታሊ ውእቱ" },
+        // ተ
+        { g: "ተንሥአ", m: "ትርጓሜሁ - ተነሣ፣ ቆመ።", l: "ተ", cat: "ባለቤት", pos: "ግሥ", ant: "ወድቀ", ex: "ተንሥአ እግዚአብሔር እምኑዋም (መዝ ፸፯፡፷፭)" },
+        { g: "ትንሣኤ", m: "ትርጓሜሁ - መነሣት፣ ሕይወት።", l: "ተ", cat: "ዘርፍ", pos: "ስም", ex: "አነ ውእቱ ትንሣኤ ወሕይወት (ዮሐ ፲፩፡፳፭)" },
+        // አ
+        { g: "አዕረፈ", m: "ትርጓሜሁ - አረፈ፣ ቀረ፣ ተወ።", l: "አ", cat: "ባለቤት", pos: "ግሥ", syn: "ዐረፈ", ex: "አዕረፈ እግዚአብሔር በሳብዕ ዕለት (ዘፍ ፪፡፪)" },
+        { g: "ዕረፍት", m: "ትርጓሜሁ - ማረፍ፣ ሰላም።", l: "አ", cat: "ዘርፍ", pos: "ስም" },
+        // ጸ
+        { g: "ጸለየ", m: "ትርጓሜሁ - ለመነ፣ አመለከ፣ ጸለየ።", l: "ጸ", cat: "ባለቤት", pos: "ግሥ", syn: "ሰአለ", ex: "አንትሙሰ ሶበ ትጸልዩ ከመዝ በሉ (ማቴ ፮፡፱)" },
+        { g: "ጸሎት", m: "ትርጓሜሁ - ልመና፣ አምልኮ።", l: "ጸ", cat: "ዘርፍ", pos: "ስም", ex: "ጸሎትየሰ ይበጻሕ ቅድሜከ (መዝ ፹፯፡፪)" }
     ];
 
     let currentFilter = 'all';
@@ -141,9 +147,9 @@
             const card = document.createElement('div');
             card.className = 'word-card';
             card.innerHTML = `
-                <div class="tag-row">
-                    <span class="tag pos-tag">${item.pos || 'ቃል'}</span>
-                    <span class="tag cat-tag">${item.cat}</span>
+                <div style="margin-bottom:10px;">
+                    <span class="tag" style="background:#f0f0f0; color:#555;">${item.pos || 'ቃል'}</span>
+                    <span class="tag" style="background:${item.cat === 'ባለቤት' ? '#e3f2fd' : '#fff3e0'}; color:${item.cat === 'ባለቤት' ? '#1565c0' : '#ef6c00'};">${item.cat}</span>
                 </div>
                 <div class="geez-text">${item.g}</div>
                 <div style="font-size:1.15rem; margin-bottom:10px; line-height:1.6;">${item.m}</div>
@@ -194,7 +200,19 @@
         body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     }
 
-    window.onload = () => render(cleanDictionary);
+    function setDailyWord() {
+        const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+        const word = cleanDictionary[dayOfYear % cleanDictionary.length];
+        document.getElementById('dw-geez').innerText = word.g;
+        document.getElementById('dw-meaning').innerText = word.m;
+    }
+
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active-section'));
+        document.getElementById(id).classList.add('active-section');
+    }
+
+    window.onload = () => { setDailyWord(); render(cleanDictionary); };
 </script>
 </body>
 </html>
