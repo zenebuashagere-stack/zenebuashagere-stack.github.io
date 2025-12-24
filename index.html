@@ -435,25 +435,6 @@
             return acc;
         }, {});
 
-        Object.keys(grouped).sort().forEach(letter => {
-            const section = document.createElement('div');
-            section.innerHTML = `<div style="font-size:1.5rem; color:var(--primary); border-bottom:2px solid var(--accent); margin:20px 0;">${letter}</div>`;
-            grouped[letter].forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'word-card';
-                const tagColor = item.cat === 'ባለቤት' ? '#e3f2fd' : '#fff3e0';
-                const textColor = item.cat === 'ባለቤት' ? '#1565c0' : '#ef6c00';
-                card.innerHTML = `
-                    <span class="tag" style="background:${tagColor}; color:${textColor}">${item.cat}</span>
-                    <span class="geez-text">${item.g}</span>
-                    <div class="meaning-text">${item.m}</div>
-                `;
-                section.appendChild(card);
-            });
-            results.appendChild(section);
-        });
-    }
-
     function setFilter(cat, btn) {
         currentFilter = cat;
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
