@@ -1,59 +1,54 @@
 <!DOCTYPE html>
 <html lang="am">
 <head>
-     <meta charset="UTF-8">
-    <!-- የተስተካከለው እና ዘመናዊው Viewport Tag -->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>መጽሐፈ ሰዋስው ወግሥ - Deacon Kewen Dejen</title>
 
-    <!-- Google AdSense -->
+    <!-- Google AdSense - ለገቢ ማግኛ ዝግጁ -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764197307756069" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #1b4332; --accent: #d4a373; --bg: #fcfaf5; --card: #ffffff; --text: #2d3436; --nav-bg: #122b21; }
+        :root { 
+            --primary: #1b4332; --accent: #d4a373; --bg: #fcfaf5; --card: #ffffff; --text: #2d3436; --nav-bg: #122b21;
+            --balebiet: #e3f2fd; --zerf: #fff3e0;
+        }
         [data-theme="dark"] { --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; --nav-bg: #000000; }
         
         body { font-family: 'Noto Sans Ethiopic', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding-bottom: 90px; transition: 0.3s ease; }
-        header { background: var(--primary); color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid var(--accent); position: relative; }
+        header { background: var(--primary); color: white; padding: 50px 20px; text-align: center; border-bottom: 5px solid var(--accent); position: relative; }
         
         .theme-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
 
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
 
-        .daily-card { 
-            background: linear-gradient(135deg, #1b4332, #2d6a4f); 
-            color: white; padding: 25px; border-radius: 20px; 
-            margin: -30px auto 20px; max-width: 600px; width: 90%;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2); text-align: center;
-        }
+        .daily-card { background: linear-gradient(135deg, #1b4332, #2d6a4f); color: white; padding: 25px; border-radius: 20px; margin: -40px auto 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); text-align: center; }
 
-        .alphabet-list {
-            display: flex; overflow-x: auto; background: var(--card); padding: 10px; gap: 10px;
-            position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+        .alphabet-list { display: flex; overflow-x: auto; background: var(--card); padding: 10px; gap: 10px; position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 10px rgba(0,0,0,0.1); scrollbar-width: none; }
+        .alphabet-list::-webkit-scrollbar { display: none; }
         .alphabet-list span { padding: 8px 15px; background: var(--bg); border-radius: 10px; cursor: pointer; font-weight: bold; color: var(--primary); border: 1px solid #eee; white-space: nowrap; }
 
-        .search-area { max-width: 600px; margin: 20px auto; padding: 0 20px; }
-        .search-box { width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #ddd; box-shadow: 0 8px 20px rgba(0,0,0,0.05); font-size: 1.1rem; outline: none; box-sizing: border-box; background: var(--card); color: var(--text); margin-top: 20px; }
+        .filter-group { display: flex; justify-content: center; gap: 8px; margin: 20px 0; }
+        .filter-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; font-size: 0.85rem; font-weight: bold; }
+        .filter-btn.active { background: var(--primary); color: white; }
 
-        .word-card { background: var(--card); border-radius: 15px; padding: 25px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 6px solid var(--primary); animation: fadeIn 0.5s ease; }
-        .geez-text { font-size: 1.8rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 8px; }
-        .meaning-text { font-size: 1.15rem; line-height: 1.8; color: #444; text-align: justify; }
-
-        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
-        .btn { padding: 8px 15px; border-radius: 8px; border: none; cursor: pointer; font-size: 0.85rem; font-weight: bold; transition: 0.2s; }
-        .btn-copy { background: #f0f0f0; color: #333; }
-        .btn-share { background: #0088cc; color: white; }
-
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav-bg); display: flex; justify-content: space-around; padding: 12px 0; z-index: 2000; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); }
+        .search-box { width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #ddd; font-size: 16px; outline: none; background: var(--card); color: var(--text); margin-top: 10px; }
+        
+        .word-card { background: var(--card); border-radius: 15px; padding: 25px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 10px solid var(--primary); position: relative; }
+        .geez-text { font-size: 2rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 5px; }
+        
+        .tag { display: inline-block; padding: 2px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; margin-bottom: 10px; margin-right: 5px; }
+        
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav-bg); display: flex; justify-content: space-around; padding: 15px 0; z-index: 2000; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); }
         .bottom-nav a { color: #ccc; text-decoration: none; font-size: 0.8rem; text-align: center; cursor: pointer; }
         .bottom-nav a.active { color: var(--accent); font-weight: bold; }
 
         .section { display: none; }
         .active-section { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        footer { text-align: center; padding: 30px; font-size: 0.9rem; color: #777; margin-bottom: 80px; }
+
+        /* ፕሮፌሽናል ግርጌ */
+        footer { background: var(--nav-bg); color: white; padding: 50px 20px; text-align: center; margin-top: 50px; border-top: 5px solid var(--accent); }
     </style>
 </head>
 <body>
@@ -61,34 +56,45 @@
 <header>
     <button class="theme-btn" onclick="toggleTheme()">🌓</button>
     <h1>መጽሐፈ ሰዋስው ወግሥ</h1>
-    <p>በዲያቆን ከውን ደጀን የተዘጋጀ</p>
+    <p>ዲያቆን ከውን ደጀን</p>
 </header>
 
 <div class="alphabet-list" id="alphabetList"></div>
 
 <main class="container">
+    <!-- መፈለጊያ ክፍል -->
     <div id="home" class="section active-section">
         <div class="daily-card" id="dailyWordCard">
             <small style="opacity: 0.8;">የዕለቱ የግዕዝ ቃል</small>
             <h2 id="dw-geez">ሀለወ</h2>
             <p id="dw-meaning">ነበረ፣ ኖረ።</p>
         </div>
-        <input type="text" id="searchInput" class="search-box" placeholder="ቃል ወይም ትርጉም ይፈልጉ..." autocomplete="off">
+        <div class="filter-group">
+            <button class="filter-btn active" onclick="setFilter('all', this)">ሁሉንም</button>
+            <button class="filter-btn" onclick="setFilter('ባለቤት', this)">ባለቤት</button>
+            <button class="filter-btn" onclick="setFilter('ዘርፍ', this)">ዘርፍ</button>
+        </div>
+        <input type="text" id="searchInput" class="search-box" placeholder="ቃል ይፈልጉ..." autocomplete="off">
         <div id="results"></div>
     </div>
 
+    <!-- ስለ ፕሮጀክቱ ክፍል -->
     <div id="about" class="section">
-        <div class="word-card">
-            <h2>ስለ ፕሮጀክቱ</h2>
-            <p>የግዕዝ ቋንቋን ሥርዓትና ሰዋስው ለዲጂታል ትውልድ ለማቅረብ የታለመ መድረክ።</p>
-            <p><b>Developed by:</b> Deacon Kewen Dejen</p>
+        <div class="word-card" style="border-top: 5px solid var(--accent);">
+            <h2 style="color: var(--primary); text-align: center;">📜 ስለ ፕሮጀክቱ</h2>
+            <div style="line-height: 2; text-align: justify; font-size: 1.1rem;">
+                <p><strong>"መጽሐፈ ሰዋስው ወግሥ"</strong> ጥንታዊውንና ቅዱሱን የግዕዝ ቋንቋ ሥርዓት ለዘመኑ ትውልድ በዲጂታል መድረክ ለማቅረብ የታለመ ታላቅ የጥበብ መዝገብ ነው። የግዕዝ ቃላትን ትርጓሜ ከመጽሐፍ ቅዱስ የታመኑ ጥቅሶች ጋር በማዛመድ፣ የቋንቋውን ሰዋስዋዊ መዋቅር (ባለቤትና ዘርፍ) ለይቶ በማሳየት ለተመራማሪዎችና ለተማሪዎች እጅግ ምቹ በሆነ መንገድ ተዘጋጅቷል።</p>
+                <p>ዋነኛው ዓላማችን የቤተክርስቲያናችንን የጥበብ አሻራዎች በዘመናዊ ቴክኖሎጂ በማበልጸግ ለትውልድ እንዲተላለፍ ማድረግ ነው።</p>
+                <p style="text-align: center; font-weight: bold; color: var(--primary);">Developed by: Deacon Kewen Dejen</p>
+            </div>
         </div>
     </div>
 
+    <!-- Privacy ክፍል -->
     <div id="privacy" class="section">
         <div class="word-card">
-            <h2>Privacy Policy</h2>
-            <p>This site uses Google AdSense cookies to sustain the educational project. We respect your privacy.</p>
+            <h2 style="color: var(--primary);">Privacy Policy</h2>
+            <p>This site uses Google AdSense cookies to sustain this educational project. We do not store personal data.</p>
         </div>
     </div>
 </main>
@@ -99,7 +105,14 @@
     <a onclick="showSection('privacy')" id="nav-privacy">🛡️<br>Privacy</a>
 </nav>
 
-<footer>Developed by Deacon Kewen Dejen &copy; 2025</footer>
+<footer>
+    <h3 style="color: var(--accent); margin-bottom: 10px;">መጽሐፈ ሰዋስው ወግሥ Digital</h3>
+    <p style="opacity: 0.8;">ኢትዮጵያዊ ጥበብን በቴክኖሎጂ የማሳደግ ራእይ</p>
+    <div style="margin: 20px 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+        <span style="font-size: 1.1rem; font-weight: bold;">Developed by: <span style="color: var(--accent);">Deacon Kewen Dejen</span></span>
+    </div>
+    <p style="font-size: 0.8rem; opacity: 0.5;">&copy; 2025 መጽሐፈ ሰዋስው ወግሥ ፕሮጀክት | መብቱ የተጠበቀ ነው</p>
+</footer>
 
 <script>
     const dictionary = [
