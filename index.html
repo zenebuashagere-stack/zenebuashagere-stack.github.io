@@ -2,48 +2,35 @@
 <html lang="am">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- የተስተካከለው እና ዘመናዊው Viewport Tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
     <title>መጽሐፈ ሰዋስው ወግሥ - Deacon Kewen Dejen</title>
 
-    <!-- Google AdSense - ያንተ መለያ ቁጥር በትክክል ገብቷል -->
+    <!-- ለአፕሊኬሽን ስሜት የሚሰጡ መለያዎች -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1b4332">
+
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764197307756069" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #1b4332;
-            --accent: #d4a373;
-            --bg: #fcfaf5;
-            --card: #ffffff;
-            --text: #2d3436;
-            --nav-bg: #122b21;
-        }
-
-        [data-theme="dark"] {
-            --bg: #121212;
-            --card: #1e1e1e;
-            --text: #e0e0e0;
-            --nav-bg: #000000;
-        }
-
-        body {
-            font-family: 'Noto Sans Ethiopic', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding-bottom: 90px; /* ለታችኛው ሜኑ ቦታ */
+        :root { --primary: #1b4332; --accent: #d4a373; --bg: #fcfaf5; --card: #ffffff; --text: #2d3436; --nav-bg: #122b21; }
+        [data-theme="dark"] { --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; --nav-bg: #000000; }
+        
+        body { 
+            font-family: 'Noto Sans Ethiopic', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            padding-bottom: 90px; 
             transition: 0.3s ease;
+            -webkit-text-size-adjust: 100%; /* በስልክ ጽሁፉ እንዳይለዋወጥ */
         }
 
-        header {
-            background: var(--primary);
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
-            border-bottom: 5px solid var(--accent);
-            position: relative;
-        }
-
+        header { background: var(--primary); color: white; padding: 50px 20px; text-align: center; border-bottom: 5px solid var(--accent); position: relative; }
         .theme-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
 
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
@@ -55,46 +42,45 @@
             margin: -40px auto 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); text-align: center;
         }
 
-        /* የፊደላት ፈጣን መዝለያ */
+        /* የፊደላት Scroller */
         .alphabet-list {
             display: flex; overflow-x: auto; background: var(--card); padding: 10px; gap: 10px;
             position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            scrollbar-width: none;
         }
         .alphabet-list::-webkit-scrollbar { display: none; }
         .alphabet-list span { padding: 8px 15px; background: var(--bg); border-radius: 10px; cursor: pointer; font-weight: bold; color: var(--primary); border: 1px solid #eee; white-space: nowrap; }
 
         .search-box {
-            width: 100%; padding: 20px 25px; border-radius: 50px; border: 1px solid #ddd; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05); font-size: 1.1rem; outline: none; 
-            box-sizing: border-box; background: var(--card); color: var(--text); margin-top: 20px;
+            width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #ddd; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05); font-size: 16px; /* 16px zooms እንዳይሆን ይከላከላል */
+            outline: none; box-sizing: border-box; background: var(--card); color: var(--text); margin-top: 20px;
         }
 
-        .word-card {
+        .word-card { 
             background: var(--card); border-radius: 15px; padding: 25px; margin-bottom: 15px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 6px solid var(--primary); animation: fadeIn 0.5s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 6px solid var(--primary); 
         }
 
         .geez-text { font-size: 1.8rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 8px; }
-        
-        /* ቁልፎች */
+        .meaning-text { font-size: 1.15rem; line-height: 1.8; text-align: justify; }
+
         .btn-group { display: flex; gap: 10px; margin-top: 15px; }
-        .btn { padding: 8px 15px; border-radius: 8px; border: none; cursor: pointer; font-size: 0.85rem; font-weight: bold; transition: 0.2s; }
+        .btn { padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; font-size: 0.9rem; font-weight: bold; transition: 0.2s; }
         .btn-copy { background: #f0f0f0; color: #333; }
         .btn-share { background: #0088cc; color: white; }
 
-        /* የታችኛው ሜኑ */
-        .bottom-nav {
+        .bottom-nav { 
             position: fixed; bottom: 0; width: 100%; background: var(--nav-bg); 
-            display: flex; justify-content: space-around; padding: 12px 0; 
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.2); z-index: 2000;
+            display: flex; justify-content: space-around; padding: 15px 0; 
+            z-index: 2000; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); 
         }
-        .bottom-nav a { color: #ccc; text-decoration: none; font-size: 0.8rem; text-align: center; cursor: pointer; }
+        .bottom-nav a { color: #ccc; text-decoration: none; font-size: 0.85rem; text-align: center; cursor: pointer; }
         .bottom-nav a.active { color: var(--accent); font-weight: bold; }
 
         .section { display: none; }
         .active-section { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        footer { text-align: center; padding: 30px; font-size: 0.9rem; color: #777; margin-bottom: 80px; }
+        footer { text-align: center; padding: 30px; font-size: 0.9rem; color: #777; margin-bottom: 90px; }
     </style>
 </head>
 <body>
@@ -109,21 +95,19 @@
 
 <main class="container">
     <div id="home" class="section active-section">
-        <!-- የዕለቱ ቃል -->
         <div class="daily-card" id="dailyWordCard">
             <small style="opacity: 0.8;">የዕለቱ የግዕዝ ቃል</small>
-            <h2 id="dw-geez" style="margin: 10px 0;">ሀለወ</h2>
-            <p id="dw-meaning">ነበረ፣ ኖረ፣ ተገኘ።</p>
+            <h2 id="dw-geez">ሀለወ</h2>
+            <p id="dw-meaning">ነበረ፣ ኖረ።</p>
         </div>
-
-        <input type="text" id="searchInput" class="search-box" placeholder="የግዕዝ ቃል ይፈልጉ..." autocomplete="off">
+        <input type="text" id="searchInput" class="search-box" placeholder="ቃል ወይም ትርጉም ይፈልጉ..." autocomplete="off">
         <div id="results"></div>
     </div>
 
     <div id="about" class="section">
         <div class="word-card">
             <h2 style="color: var(--primary);">ስለ ፕሮጀክቱ</h2>
-            <p>ይህ ድረ-ገጽ የግዕዝ ቋንቋን ሥርዓትና ሰዋስው ለዲጂታል ትውልድ ለማቅረብ የታለመ የሊቃውንት ትምህርት መድረክ ነው።</p>
+            <p>የግዕዝ ቋንቋን ሥርዓትና ሰዋስው ለዲጂታል ትውልድ ለማቅረብ የታለመ መድረክ።</p>
             <p><b>Developed by:</b> Deacon Kewen Dejen</p>
         </div>
     </div>
@@ -131,15 +115,15 @@
     <div id="privacy" class="section">
         <div class="word-card">
             <h2 style="color: var(--primary);">Privacy Policy</h2>
-            <p>We respect your privacy. This site uses Google AdSense cookies to provide relevant content and sustain the project.</p>
+            <p>This site uses Google AdSense cookies to sustain the educational mission. No personal data is stored.</p>
         </div>
     </div>
 </main>
 
 <nav class="bottom-nav">
-    <a onclick="showSection('home')" id="nav-home" class="active"><span>🏠</span><br>መፈለጊያ</a>
-    <a onclick="showSection('about')" id="nav-about"><span>📖</span><br>ስለ እኛ</a>
-    <a onclick="showSection('privacy')" id="nav-privacy"><span>🛡️</span><br>Privacy</a>
+    <a onclick="showSection('home')" id="nav-home" class="active">🏠<br>መፈለጊያ</a>
+    <a onclick="showSection('about')" id="nav-about">📖<br>ስለ እኛ</a>
+    <a onclick="showSection('privacy')" id="nav-privacy">🛡️<br>Privacy</a>
 </nav>
 
 <footer>Developed by Deacon Kewen Dejen &copy; 2025</footer>
@@ -417,7 +401,8 @@
         { g: "ሜጠ", t: "ግሥ", m: "ትርጓሜሁ - መለሰ። ጥቅስ - 'ሜጠ ገጾ' (መዝ ፳፮፡፱)", l: "መ" }
     ];
 
-   const letters = ["ሀ", "ለ", "ሐ", "መ", "ሠ", "ረ", "ሰ", "ቀ", "በ", "ተ", "ኀ", "ነ", "አ", "ከ", "ወ", "ዐ", "ዘ", "የ", "ደ", "ገ", "ጠ", "ጰ", "ጸ", "ፀ", "ፈ", "ፐ"];
+   // ፊደላት Scroller
+    const letters = ["ሀ", "ለ", "ሐ", "መ", "ሠ", "ረ", "ሰ", "ቀ", "በ", "ተ", "ኀ", "ነ", "አ", "ከ", "ወ", "ዐ", "ዘ", "የ", "ደ", "ገ", "ጠ", "ጰ", "ጸ", "ፀ", "ፈ", "ፐ"];
     const alphaList = document.getElementById('alphabetList');
     letters.forEach(L => {
         const span = document.createElement('span');
@@ -459,14 +444,12 @@
                     <div class="meaning-text">${item.m}</div>
                     <div class="btn-group">
                         <button class="btn btn-copy" onclick="copyWord('${item.g}', '${item.m}')">Copy</button>
-                        <button class="btn btn-share" onclick="shareTelegram('${item.g}', '${item.m}')">Telegram Share</button>
                     </div>`;
                 section.appendChild(card);
             });
             results.appendChild(section);
         });
     }
-
     function copyWord(g, m) {
         navigator.clipboard.writeText(`${g}: ${m}\nተጨማሪ በ: ${window.location.href}`).then(() => alert("ኮፒ ተደርጓል!"));
     }
@@ -485,8 +468,13 @@
         document.getElementById(id).classList.add('active-section');
         document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
         document.getElementById('nav-' + id).classList.add('active');
-        if(id !== 'home') document.getElementById('dailyWordCard').style.display = 'none';
-        else document.getElementById('dailyWordCard').style.display = 'block';
+        if(id !== 'home') {
+            document.getElementById('dailyWordCard').style.display = 'none';
+            document.getElementById('alphabetList').style.display = 'none';
+        } else {
+            document.getElementById('dailyWordCard').style.display = 'block';
+            document.getElementById('alphabetList').style.display = 'flex';
+        }
     }
 
     document.getElementById('searchInput').addEventListener('input', e => filterWords(e.target.value));
