@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>መጽሐፈ ሰዋስው ወግሥ - Deacon Kewen Dejen</title>
 
-    <!-- Google AdSense Code -->
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764197307756069" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
@@ -16,18 +16,23 @@
         body { font-family: 'Noto Sans Ethiopic', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding-bottom: 90px; transition: 0.3s ease; }
         header { background: var(--primary); color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid var(--accent); position: relative; }
         .theme-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
+
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
         .daily-card { background: linear-gradient(135deg, #1b4332, #2d6a4f); color: white; padding: 25px; border-radius: 20px; margin: -40px auto 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); text-align: center; }
+
         .alphabet-list { display: flex; overflow-x: auto; background: var(--card); padding: 10px; gap: 10px; position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 10px rgba(0,0,0,0.1); scrollbar-width: none; }
-        .alphabet-list::-webkit-scrollbar { display: none; }
         .alphabet-list span { padding: 8px 15px; background: var(--bg); border-radius: 10px; cursor: pointer; font-weight: bold; color: var(--primary); border: 1px solid #eee; white-space: nowrap; }
-        .search-box { width: 100%; padding: 20px 25px; border-radius: 50px; border: 1px solid #ddd; box-shadow: 0 8px 20px rgba(0,0,0,0.05); font-size: 16px; outline: none; background: var(--card); color: var(--text); margin-top: 10px; box-sizing: border-box; }
-        .word-card { background: var(--card); border-radius: 15px; padding: 25px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); animation: fadeIn 0.5s ease; }
+
+        .search-box { width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #ddd; box-shadow: 0 8px 20px rgba(0,0,0,0.05); font-size: 16px; outline: none; background: var(--card); color: var(--text); margin-top: 20px; box-sizing: border-box; }
+        .word-card { background: var(--card); border-radius: 15px; padding: 25px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 10px solid var(--primary); animation: fadeIn 0.5s ease; }
         .geez-text { font-size: 1.8rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 8px; }
         .meaning-text { font-size: 1.15rem; line-height: 1.8; color: var(--text); text-align: justify; }
+        .tag { display: inline-block; padding: 2px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; margin-bottom: 10px; background: #e3f2fd; color: #1565c0; }
+
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--nav-bg); display: flex; justify-content: space-around; padding: 12px 0; z-index: 2000; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); }
         .bottom-nav a { color: #ccc; text-decoration: none; font-size: 0.85rem; text-align: center; cursor: pointer; }
         .bottom-nav a.active { color: var(--accent); font-weight: bold; }
+
         .section { display: none; }
         .active-section { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -48,18 +53,19 @@
     <div id="home" class="section active-section">
         <div class="daily-card" id="dailyWordCard">
             <small style="opacity: 0.8;">የዕለቱ የግዕዝ ቃል</small>
-            <h2 id="dw-geez">ሀለወ</h2>
+            <h2 id="dw-geez" style="margin: 10px 0;">ሀለወ</h2>
             <p id="dw-meaning">ነበረ፣ ኖረ።</p>
         </div>
-        <input type="text" id="searchInput" class="search-box" placeholder="የግዕዝ ቃል ወይም ትርጉም ይፈልጉ..." autocomplete="off">
+        <input type="text" id="searchInput" class="search-box" placeholder="የግዕዝ ቃል ይፈልጉ..." autocomplete="off">
         <div id="results"></div>
     </div>
 
     <div id="about" class="section">
         <div class="word-card">
-            <h2 style="color: var(--primary);">📜 ስለ ፕሮጀክቱ</h2>
+            <h2>📜 ስለ ፕሮጀክቱ</h2>
             <p>የግዕዝ ቋንቋን ሥርዓትና ሰዋስው ለዲጂታል ትውልድ ለማቅረብ የታለመ መድረክ።</p>
             <p><b>Developed by:</b> Deacon Kewen Dejen</p>
+            <p><b>Contact:</b> +251980520360 | zenebuashager@gmail.com</p>
         </div>
     </div>
 </main>
@@ -73,8 +79,8 @@
 <footer>Developed by Deacon Kewen Dejen &copy; 2025</footer>
 
 <script>
-    const dictionary = [
-       { g: "ሃልሀ", m: "ወደረ (የከብት)", l: "ሀ", cat: "ግሥ" },
+   const dictionaryData = [
+        { g: "ሃልሀ", m: "ወደረ (የከብት)", l: "ሀ", cat: "ግሥ" },
         { g: "ለሕሐ", m: "ቀዳ (የውሃ የመጽሐፍ)", l: "ለ", cat: "ግሥ" },
         { g: "ላሕልሐ", m: "ራሰ", l: "ለ", cat: "ግሥ" },
         { g: "ለስሐ", m: "አልጫ ሆነ (የወጥ)", l: "ለ", cat: "ግሥ" },
@@ -847,13 +853,13 @@
         { g: "ፈቅዐ", m: "ሰነጠቀ", l: "ፈ", cat: "ግሥ" },
         { g: "ፈግዐ", m: "ተደሰተ", l: "ፈ", cat: "ግሥ" },
         { g: "ሐነከ", m: "ሰጠ፣ አደቀቀ፣ ፈጨ", l: "ሐ", cat: "ግሥ" },
-    { g: "ሐከከ", m: "ተከራከረ", l: "ሐ", cat: "ግሥ" },
-    { g: "ሆከ", m: "አወከ", l: "ሀ", cat: "ግሥ" },
-    { g: "ሔከ", m: "አላመጠ", l: "ሐ", cat: "ግሥ" },
-    { g: "ለሐኰ", m: "ሠራ", l: "ለ", cat: "ግሥ" },
-    { g: "ለአከ", m: "ላከ፣ ሰደደ", l: "ለ", cat: "ግሥ" },
-    { g: "ለከከ", m: "ጻፈ፣ ለከከ፣ ቀባ", l: "ለ", cat: "ግሥ" },
-    { g: "መሐከ", m: "ራራ", l: "መ", cat: "ግሥ" },
+        { g: "ሐከከ", m: "ተከራከረ", l: "ሐ", cat: "ግሥ" },
+        { g: "ሆከ", m: "አወከ", l: "ሀ", cat: "ግሥ" },
+        { g: "ሔከ", m: "አላመጠ", l: "ሐ", cat: "ግሥ" },
+        { g: "ለሐኰ", m: "ሠራ", l: "ለ", cat: "ግሥ" },
+        { g: "ለአከ", m: "ላከ፣ ሰደደ", l: "ለ", cat: "ግሥ" },
+        { g: "ለከከ", m: "ጻፈ፣ ለከከ፣ ቀባ", l: "ለ", cat: "ግሥ" },
+        { g: "መሐከ", m: "ራራ", l: "መ", cat: "ግሥ" },
     { g: "ማሕረከ", m: "ማረከ", l: "መ", cat: "ግሥ" },
     { g: "መለከ", m: "ገዛ", l: "መ", cat: "ግሥ" },
     { g: "መሰከ", m: "አቀጠነ", l: "መ", cat: "ግሥ" },
@@ -1433,28 +1439,15 @@
     { g: "ሰረፐ", m: "ቀደሰ", l: "ሰ", cat: "ግሥ" },
     { g: "ሮፐ", m: "ጸና", l: "ረ", cat: "ግሥ" },
     { g: "ከተፐ", m: "ጻፈ", l: "ከ", cat: "ግሥ" }
-];
+    ];
     
-    const letters = ["ሀ", "ለ", "ሐ", "መ", "ሠ", "ረ", "ሰ", "ቀ", "በ", "ተ", "ኀ", "ነ", "አ", "ከ", "ወ", "ዐ", "ዘ", "የ", "ደ", "ገ", "ጠ", "ጰ", "ጸ", "ፀ", "ፈ", "ፐ"];
-    const alphaList = document.getElementById('alphabetList');
-    letters.forEach(L => {
-        const span = document.createElement('span');
-        span.innerText = L;
-        span.onclick = () => { document.getElementById('searchInput').value = L; filterWords(L); };
-        alphaList.appendChild(span);
-    });
-
-    function toggleTheme() {
-        const body = document.body;
-        body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    function getUniqueWords(data) {
+        const unique = []; const seen = new Set();
+        data.forEach(item => { if (!seen.has(item.g)) { seen.add(item.g); unique.push(item); } });
+        return unique;
     }
 
-    function setDailyWord() {
-        const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-        const word = dictionary[dayOfYear % dictionary.length];
-        document.getElementById('dw-geez').innerText = word.g;
-        document.getElementById('dw-meaning').innerText = word.m;
-    }
+    const cleanDictionary = getUniqueWords(dictionaryData);
 
     function render(data) {
         const results = document.getElementById('results');
@@ -1465,7 +1458,6 @@
             acc[letter].push(item);
             return acc;
         }, {});
-        
 
         Object.keys(grouped).sort().forEach(letter => {
             const section = document.createElement('div');
@@ -1473,30 +1465,30 @@
             grouped[letter].forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'word-card';
-                card.innerHTML = `
-                    <span class="geez-text">${item.g}</span>
-                    <div class="meaning-text">${item.m}</div>
-                    <div class="btn-group">
-                        <button class="btn btn-copy" onclick="copyWord('${item.g}', '${item.m}')">Copy</button>
-                        <button class="btn btn-share" onclick="shareTelegram('${item.g}', '${item.m}')">Telegram Share</button>
-                    </div>`;
+                card.innerHTML = `<span class="tag">${item.cat || 'ግሥ'}</span><span class="geez-text">${item.g}</span><div class="meaning-text">${item.m}</div>`;
                 section.appendChild(card);
             });
             results.appendChild(section);
         });
     }
 
-    function copyWord(g, m) {
-        navigator.clipboard.writeText(`${g}: ${m}\nተጨማሪ በ: ${window.location.href}`).then(() => alert("ኮፒ ተደርጓል!"));
+    const letters = ["ሀ", "ለ", "ሐ", "መ", "ሠ", "ረ", "ሰ", "ቀ", "በ", "ተ", "ኀ", "ነ", "አ", "ከ", "ወ", "ዐ", "ዘ", "የ", "ደ", "ገ", "ጠ", "ጰ", "ጸ", "ፀ", "ፈ", "ፐ"];
+    const alphaList = document.getElementById('alphabetList');
+    letters.forEach(L => {
+        const span = document.createElement('span');
+        span.innerText = L;
+        span.onclick = () => { document.getElementById('searchInput').value = L; applyFilters(); window.scrollTo({top: 200, behavior: 'smooth'}); };
+        alphaList.appendChild(span);
+    });
+
+    function applyFilters() {
+        const q = document.getElementById('searchInput').value.trim();
+        render(cleanDictionary.filter(i => i.g.includes(q) || i.m.includes(q)));
     }
 
-    function shareTelegram(g, m) {
-        const text = encodeURIComponent(`📜 *የግዕዝ ቃል:* ${g}\n📖 *ትርጉም:* ${m}\n\n🔗 ድረ-ገጻችን: ${window.location.href}`);
-        window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`);
-    }
-
-    function filterWords(q) {
-        render(dictionary.filter(i => i.g.includes(q) || i.m.includes(q)));
+    function toggleTheme() {
+        const body = document.body;
+        body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     }
 
     function showSection(id) {
@@ -1504,12 +1496,19 @@
         document.getElementById(id).classList.add('active-section');
         document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
         document.getElementById('nav-' + id).classList.add('active');
-        if(id !== 'home') document.getElementById('dailyWordCard').style.display = 'none';
-        else document.getElementById('dailyWordCard').style.display = 'block';
+        if(id !== 'home') { document.getElementById('dailyWordCard').style.display = 'none'; document.getElementById('alphabetList').style.display = 'none'; }
+        else { document.getElementById('dailyWordCard').style.display = 'block'; document.getElementById('alphabetList').style.display = 'flex'; }
     }
 
-    document.getElementById('searchInput').addEventListener('input', e => filterWords(e.target.value));
-    window.onload = () => { setDailyWord(); render(dictionary); };
+    function setDailyWord() {
+        const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+        const word = cleanDictionary[dayOfYear % cleanDictionary.length];
+        document.getElementById('dw-geez').innerText = word.g;
+        document.getElementById('dw-meaning').innerText = word.m;
+    }
+
+    document.getElementById('searchInput').addEventListener('input', applyFilters);
+    window.onload = () => { setDailyWord(); render(cleanDictionary); };
 </script>
 </body>
 </html>
