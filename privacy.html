@@ -2,61 +2,207 @@
 <html lang="am">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - መጽሐፈ ሰዋስው ወግሥ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>መጽሐፈ ሰዋስው ወግሥ - Deacon Kewen Dejen</title>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764197307756069" crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        :root { --primary: #1b4332; --accent: #d4a373; --bg: #fcfaf5; --text: #2d3436; }
-        body { font-family: 'Noto Sans Ethiopic', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.8; margin: 0; padding: 0; }
-        header { background: var(--primary); color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid var(--accent); }
-        .container { max-width: 850px; margin: 40px auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        h1, h2 { color: var(--primary); border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        p { margin-bottom: 20px; text-align: justify; }
-        .contact-info { background: #f9f9f9; padding: 20px; border-radius: 10px; border-left: 5px solid var(--accent); }
-        .back-link { display: inline-block; margin-top: 30px; padding: 12px 25px; background: var(--primary); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; }
-        footer { text-align: center; padding: 30px; font-size: 0.9rem; color: #777; }
+        :root { 
+            --primary: #1b4332; --accent: #d4a373; --bg: #f4f7f6; --white: #ffffff; 
+            --text: #2d3436; --gold: #ffd700; --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        [data-theme="dark"] { --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; }
+
+        body { font-family: 'Noto Sans Ethiopic', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding-bottom: 90px; transition: 0.3s; overflow-x: hidden; }
+
+        header { 
+            background: var(--primary); color: white; padding: 20px; 
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 4px solid var(--accent); position: sticky; top: 0; z-index: 1001;
+        }
+        .auth-btns button { background: var(--accent); border: none; color: white; padding: 8px 15px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+
+        /* የቋንቋ መቀየሪያ ዘመናዊ መልክ */
+        #google_translate_element { padding: 10px; background: white; border-bottom: 1px solid #ddd; text-align: center; }
+        .goog-te-gadget-simple { border-radius: 10px !important; padding: 5px 10px !important; border: 1px solid var(--primary) !important; }
+
+        .alphabet-list { display: flex; overflow-x: auto; background: var(--white); padding: 12px; gap: 8px; position: sticky; top: 75px; z-index: 999; box-shadow: var(--shadow); scrollbar-width: none; }
+        .alphabet-list span { padding: 8px 18px; background: #f0f0f0; border-radius: 12px; cursor: pointer; font-weight: bold; color: var(--primary); }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 15px; }
+        .daily-card { background: linear-gradient(135deg, var(--primary), #2d6a4f); color: white; padding: 25px; border-radius: 20px; margin: 10px 0 20px; text-align: center; box-shadow: var(--shadow); }
+
+        .search-box { width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #ddd; font-size: 16px; outline: none; background: var(--white); box-sizing: border-box; }
+
+        .word-card { background: var(--white); border-radius: 15px; padding: 25px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); position: relative; }
+        .geez-text { font-size: 1.8rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 8px; }
+        
+        .tool-bar { display: flex; gap: 20px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 12px; color: #636e72; }
+        .tool-bar i { cursor: pointer; transition: 0.2s; }
+        .active-icon { color: var(--gold) !important; }
+
+        .chat-btn { position: fixed; bottom: 100px; right: 20px; background: var(--accent); color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 1000; }
+
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 12px 0; z-index: 2000; }
+        .bottom-nav a { color: #ccc; text-decoration: none; font-size: 0.8rem; text-align: center; cursor: pointer; }
+        .bottom-nav a.active { color: var(--accent); font-weight: bold; }
+
+        .section { display: none; }
+        .active-section { display: block; }
+        footer { text-align: center; padding: 30px; font-size: 0.85rem; color: #777; margin-bottom: 80px; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Privacy Policy</h1>
-    <p>መጽሐፈ ሰዋስው ወግሥ - ዲጂታል እትም</p>
+    <div class="logo-area"><h1>ሰዋስው ወግሥ</h1></div>
+    <div class="auth-btns">
+        <button onclick="toggleTheme()">🌓</button>
+        <button onclick="alert('በቅርቡ ይጀምራል!')">Log In</button>
+    </div>
 </header>
 
-<div class="container">
-    <p><em>Last updated: December 24, 2025</em></p>
-    
-    <p>በ <strong>"መጽሐፈ ሰዋስው ወግሥ"</strong> ድረ-ገጽ የተጠቃሚዎቻችን ግላዊነት ቅድሚያ የምንሰጠው ጉዳይ ነው። ይህ ሰነድ በድረ-ገጻችን የሚሰበሰቡ የመረጃ አይነቶችንና አጠቃቀማቸውን ለጎብኝዎቻችን እና ለ Google AdSense ግልጽ ለማድረግ የተዘጋጀ ነው።</p>
+<!-- የቋንቋ መቀየሪያ (Translation Engine) -->
+<div id="google_translate_element"></div>
 
-    <h2>1. Information We Collect</h2>
-    <p>At መጽሐፈ ሰዋስው ወግሥ, we do not require any personal registration or user login. We follow a standard procedure of using log files. These files log visitors when they visit websites. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, and referring/exit pages.</p>
+<div class="alphabet-list" id="alphabetList"></div>
 
-    <h2>2. Google AdSense and DART Cookies</h2>
-    <p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to our site and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy.</p>
-
-    <h2>3. Personal Data Protection</h2>
-    <p>We do not sell, trade, or otherwise transfer your personal information to outside parties. Our primary goal is to provide educational content regarding the Geez language and grammar in a secure environment.</p>
-
-    <h2>4. Consent</h2>
-    <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms and conditions.</p>
-
-    <h2>5. Contact Information (አድራሻ)</h2>
-    <div class="contact-info">
-        <p>ስለዚህ መዝገበ ቃላት ወይም ስለ ግላዊነት መመሪያው ማንኛውም ጥያቄ ካለዎት በሚከተሉት አድራሻዎች ሊያገኙን ይችላሉ፦</p>
-        <ul>
-            <li><strong>አዘጋጅ፦</strong> ዲያቆን ከውን ደጀን (Deacon Kewen Dejen)</li>
-            <li><strong>ስልክ፦</strong> <a href="tel:+251980520360">+251 980 520 360</a></li>
-            <li><strong>ኢሜይል፦</strong> <a href="mailto:zenebuashager@gmail.com">zenebuashager@gmail.com</a></li>
-        </ul>
+<main class="container">
+    <div id="home" class="section active-section">
+        <div class="daily-card" id="dailyWordCard">
+            <small>የዕለቱ ቃል</small>
+            <h2 id="dw-geez">ሀለወ</h2>
+            <p id="dw-meaning">ነበረ፣ ኖረ።</p>
+        </div>
+        <input type="text" id="searchInput" class="search-box" placeholder="የግዕዝ ቃል ይፈልጉ..." autocomplete="off">
+        <div id="results"></div>
     </div>
 
-    <a href="index.html" class="back-link">ወደ መፈለጊያው ተመለስ</a>
-</div>
+    <div id="about" class="section">
+        <div class="word-card">
+            <h2>📜 ስለ ፕሮጀክቱ</h2>
+            <p>የግዕዝ ቋንቋን ሥርዓትና ሰዋስው ለዲጂታል ትውልድ ለማቅረብ የታለመ መድረክ።</p>
+            <p><b>Developed by:</b> Deacon Kewen Dejen</p>
+            <p><b>Contact:</b> +251980520360</p>
+        </div>
+    </div>
+</main>
 
-<footer>
-    &copy; 2025 መጽሐፈ ሰዋስው ወግሥ | Developed by Deacon Kewen Dejen
-</footer>
+<div class="chat-btn" onclick="window.open('https://t.me/zenebuashager')"><i class="fa-solid fa-comments fa-xl"></i></div>
 
+<nav class="bottom-nav">
+    <a onclick="showSection('home')" id="nav-home" class="active"><i class="fa-solid fa-house"></i><br>ቤት</a>
+    <a onclick="showSection('about')"><i class="fa-solid fa-book-open"></i><br>ስለ እኛ</a>
+    <a href="privacy.html"><i class="fa-solid fa-shield-halved"></i><br>Privacy</a>
+</nav>
+
+<!-- Google Translation Script -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'am',
+    includedLanguages: 'am,om,ti,en', // አማርኛ፣ ኦሮምኛ፣ ትግርኛ፣ እንግሊዝኛ
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+    // --- ያቀረብካቸው ቃላት በሙሉ አንድም ሳይጎድል ተካተዋል ---
+    const dictionaryData = [
+        { g: "ሃልሀ", m: "ወደረ (የከብት)", l: "ሀ" }, { g: "ለሕሐ", m: "ቀዳ (የውሃ የመጽሐፍ)", l: "ለ" },
+        { g: "ላሕልሐ", m: "ራሰ", l: "ለ" }, { g: "ለስሐ", m: "አልጫ ሆነ (የወጥ)", l: "ለ" },
+        { g: "ለቅሐ", m: "አበደረ", l: "ለ" }, { g: "ለብሐ", m: "ሠራ (የሸክላ ብቻ)", l: "ለ" },
+        { g: "ለጥሐ", m: "ገበረ", l: "ለ" }, { g: "ማሕምሐ", m: "አፈረሰ", l: "መ" },
+        { g: "መልኀ", m: "መዘዘ", l: "መ" }, { g: "መልሐ", m: "አጣፈጠ", l: "መ" },
+        { g: "መስሐ", m: "ምሳ አደረገ", l: "መ" }, { g: "መርሐ", m: "መራ", l: "መ" },
+        { g: "ሞርቅሐ", m: "ላጠ", l: "መ" }, { g: "ሞቅሐ", m: "አሰረ", l: "መ" },
+        { g: "ሰርሐ", m: "ሠራ", l: "ሰ" }, { g: "ሠርሐ", m: "አከናወነ", l: "ሠ" },
+        { g: "ሰብሐ", m: "አመሰገነ", l: "ሰ" }, { g: "ረምሐ", m: "ወጋ (የጦር)", l: "ረ" },
+        { g: "ቀሕቅሐ", m: "ተንቆራቆሰ", l: "ቀ" }, { g: "በልኀ", m: "ተሳለ", l: "በ" },
+        { g: "ባልሐ", m: "አዳነ", l: "በ" }, { g: "በጽሐ", m: "ደረሰ", l: "በ" },
+        { g: "ተመክሐ", m: "ተመካ", l: "ተ" }, { g: "ነስሐ", m: "ተጸጸተ", l: "ነ" },
+        { g: "ነጽሐ", m: "ንጹሕ ሆነ", l: "ነ" }, { g: "አብሐ", m: "አሰናበተ", l: "አ" },
+        { g: "ከልሐ", m: "ጮኽ", l: "ከ" }, { g: "ዘብሐ", m: "አረደ", l: "ዘ" },
+        { g: "ጠብሐ", m: "አረደ", l: "ጠ" }, { g: "ጸርሐ", m: "ጮኸ", l: "ጸ" },
+        { g: "ፈትሐ", m: "ፈታ፣ ፈረደ", l: "ፈ" }, { g: "ሀለወ", m: "ኖረ", l: "ሀ" }
+    ];
+
+    function getUniqueWords(data) {
+        const unique = []; const seen = new Set();
+        data.forEach(item => { if (!seen.has(item.g)) { seen.add(item.g); unique.push(item); } });
+        return unique;
+    }
+
+    const cleanDictionary = getUniqueWords(dictionaryData);
+
+    function render(data) {
+        const results = document.getElementById('results');
+        results.innerHTML = '';
+        data.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'word-card';
+            card.innerHTML = `
+                <span class="geez-text">${item.g}</span>
+                <div class="meaning-text">${item.m}</div>
+                <div class="tool-bar">
+                    <i class="fa-regular fa-heart" onclick="this.classList.toggle('fa-solid'); this.classList.toggle('active-icon')"></i>
+                    <i class="fa-regular fa-star" onclick="this.classList.toggle('fa-solid'); this.classList.toggle('active-icon')"></i>
+                    <i class="fa-regular fa-bookmark" onclick="this.classList.toggle('fa-solid'); this.classList.toggle('active-icon')"></i>
+                    <i class="fa-solid fa-share-nodes" onclick="shareWord('${item.g}')"></i>
+                </div>
+            `;
+            results.appendChild(card);
+        });
+    }
+
+    function shareWord(word) {
+        const text = encodeURIComponent(`ቃል: ${word}\nተጨማሪ በ: ${window.location.href}`);
+        window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`);
+    }
+
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active-section'));
+        document.getElementById(id).classList.add('active-section');
+        document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
+        if(id === 'home') document.getElementById('nav-home').classList.add('active');
+        window.scrollTo(0,0);
+    }
+
+    const letters = ["ሀ", "ለ", "ሐ", "መ", "ሠ", "ረ", "ሰ", "ቀ", "በ", "ተ", "ኀ", "ነ", "አ", "ከ", "ወ", "ዐ", "ዘ", "የ", "ደ", "ገ", "ጠ", "ጰ", "ጸ", "ፀ", "ፈ", "ፐ"];
+    const alphaList = document.getElementById('alphabetList');
+    letters.forEach(L => {
+        const span = document.createElement('span');
+        span.innerText = L;
+        span.onclick = () => { 
+            document.getElementById('searchInput').value = L; 
+            render(cleanDictionary.filter(i => i.g.startsWith(L))); 
+        };
+        alphaList.appendChild(span);
+    });
+
+    function toggleTheme() {
+        document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    }
+
+    document.getElementById('searchInput').addEventListener('input', e => {
+        const q = e.target.value.trim();
+        render(cleanDictionary.filter(i => i.g.includes(q) || i.m.includes(q)));
+    });
+
+    window.onload = () => {
+        const word = cleanDictionary[Math.floor(Math.random() * cleanDictionary.length)];
+        document.getElementById('dw-geez').innerText = word.g;
+        document.getElementById('dw-meaning').innerText = word.m;
+        render(cleanDictionary);
+    };
+</script>
 </body>
 </html>
