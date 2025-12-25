@@ -116,7 +116,7 @@ function googleTranslateElementInit() {
 
 <script>
     // --- ያቀረብካቸው ቃላት በሙሉ አንድም ሳይጎድል ተካተዋል ---
-    const dictionaryData = [
+      const dictionaryData = [
         { g: "ሃልሀ", m: "ወደረ (የከብት)", l: "ሀ", cat: "ግሥ" },
         { g: "ለሕሐ", m: "ቀዳ (የውሃ የመጽሐፍ)", l: "ለ", cat: "ግሥ" },
         { g: "ላሕልሐ", m: "ራሰ", l: "ለ", cat: "ግሥ" },
@@ -939,7 +939,6 @@ function googleTranslateElementInit() {
         { g: "ለሐወ", m: "አለቀሰ", l: "ለ", cat: "ግሥ" },
         { g: "ሎለወ", m: "ለበለበ", l: "ለ", cat: "ግሥ" },
         { g: "ለቀወ", m: "ከፈተ፣ አላቀቀ", l: "ለ", cat: "ግሥ" },
-        { g: "ለበወ", m: "ልብ አደረገ፣ አስተዋለ", l: "ለ", cat: "ግሥ" },
         { g: "ለከወ", m: "ደነገዘ", l: "ለ", cat: "ግሥ" },
         { g: "ለወወ", m: "ተኮረ፣ ደፈረ", l: "ለ", cat: "ግሥ" },
         { g: "ሌወወ", m: "ጠመጠመ", l: "ለ", cat: "ግሥ" },
@@ -1024,39 +1023,24 @@ function googleTranslateElementInit() {
         { g: "አድለወ", m: "አደላ", l: "አ", cat: "ግሥ" },
         { g: "አጥዐወ", m: "አመለከ", l: "አ", cat: "ግሥ" },
         { g: "ዐፀወ", m: "ዘጋ", l: "ዐ", cat: "ግሥ" },
-        { g: "አጸንጰወ", m: "ጠመዘዘ", l: "አ", cat: "ግሥ" },
         { g: "ከዐወ", m: "አፈሰሰ", l: "ከ", cat: "ግሥ" },
         { g: "ከወወ", m: "ቅልጥፍጥፍ አለ", l: "ከ", cat: "ግሥ" },
-        { g: "ወልተወ", m: "መከተ", l: "ወ", cat: "ግሥ" },
         { g: "ወረወ", m: "ወረወረ", l: "ወ", cat: "ግሥ" },
         { g: "ወርዘወ", m: "ጎለመሰ", l: "ወ", cat: "ግሥ" },
         { g: "ወይለወ", m: "አለቀሰ", l: "ወ", cat: "ግሥ" },
-        { g: "ዘመወ", m: "በደለ፣ ሴሰኛ ሆነ", l: "ዘ", cat: "ግሥ" },
+        { g: "ዘመወ", m: "በደለ", l: "ዘ", cat: "ግሥ" },
         { g: "ዘረወ", m: "በተነ", l: "ዘ", cat: "ግሥ" },
-        { g: "ዜነወ", m: "ነገረ፣ አወራ", l: "ዘ", cat: "ግሥ" },
+        { g: "ዜነወ", m: "አወራ", l: "ዘ", cat: "ግሥ" },
         { g: "ደለወ", m: "ተገባ", l: "ደ", cat: "ግሥ" },
         { g: "ደመወ", m: "ደም ሆነ", l: "ደ", cat: "ግሥ" },
         { g: "ደንቀወ", m: "ደነቆረ", l: "ደ", cat: "ግሥ" },
-        { g: "ደንጸወ", m: "ነፈገ", l: "ደ", cat: "ግሥ" },
-        { g: "ጓሕለወ", m: "ሸነገለ", l: "ገ", cat: "ግሥ" },
-        { g: "ጓሕነወ", m: "ጮኽ፣ አመሰገነ", l: "ገ", cat: "ግሥ" },
-        { g: "ገለወ", m: "ሸፈነ", l: "ገ", cat: "ግሥ" },
-        { g: "ገነወ", m: "አመለከ", l: "ገ", cat: "ግሥ" },
-        { g: "ገጸወ", m: "ለየ፣ ገለጠ", l: "ገ", cat: "ግሥ" },
-        { g: "ጠወወ", m: "አጣመመ", l: "ጠ", cat: "ግሥ" },
-        { g: "ጠበወ", m: "ጠባ", l: "ጠ", cat: "ግሥ" },
-        { g: "ጽሕወ", m: "በራ (የዝናም)", l: "ጸ", cat: "ግሥ" },
-        { g: "ጸለወ", m: "ቀቀረ", l: "ጸ", cat: "ግሥ" },
-        { g: "ጸልሐወ", m: "ሽነገለ", l: "ጸ", cat: "ግሥ" },
-        { g: "ጸመወ", m: "ደነቆረ", l: "ጸ", cat: "ግሥ" },
-        { g: "ጻመወ", m: "ደከመ", l: "ጸ", cat: "ግሥ" },
-        { g: "ጸቀወ", m: "ወጋ", l: "ጸ", cat: "ግሥ" },
-        { g: "ፆተወ", m: "ወገን ሆነ", l: "ጸ", cat: "ግሥ" },
-        { g: "ጼነወ", m: "ሸተተ", l: "ጸ", cat: "ግሥ" },
-        { g: "ጻዕደወ", m: "ነጭ ሆነ", l: "ጸ", cat: "ግሥ" },
-        { g: "ፄወወ", m: "ማረከ፣ ቀማ", l: "ጸ", cat: "ግሥ" },
+        { g: "ደነነ", m: "አዘነበለ", l: "ደ", cat: "ግሥ" },
+        { g: "ደየነ", m: "ፈረደ", l: "ደ", cat: "ግሥ" },
+        { g: "ገመነ", m: "በደለ", l: "ገ", cat: "ግሥ" },
+        { g: "ጠሐነ", m: "ፈጨ", l: "ጠ", cat: "ግሥ" },
+        { g: "ጸዐነ", m: "ጫነ", l: "ጸ", cat: "ግሥ" },
         { g: "ጸገወ", m: "ሰጠ", l: "ጸ", cat: "ግሥ" },
-        { g: "ፈተወ", m: "ወደደ", l: "ፈ", cat: "ግሥ" },
+        { g: "ፈተነ", m: "ፈተነ", l: "ፈ", cat: "ግሥ" },
         { g: "ፈነወ", m: "ላከ", l: "ፈ", cat: "ግሥ" },
         { g: "ሐልዘዘ", m: "አፈራ (ዛጎል)", l: "ሐ", cat: "ግሥ" },
         { g: "ሐመዘ", m: "መርዝ አደረገ", l: "ሐ", cat: "ግሥ" },
@@ -1476,8 +1460,14 @@ function googleTranslateElementInit() {
     ];
 
     function getUniqueWords(data) {
-        const unique = []; const seen = new Set();
-        data.forEach(item => { if (!seen.has(item.g)) { seen.add(item.g); unique.push(item); } });
+        const unique = [];
+        const seen = new Set();
+        data.forEach(item => {
+            if (!seen.has(item.g)) {
+                seen.add(item.g);
+                unique.push(item);
+            }
+        });
         return unique;
     }
 
@@ -1486,23 +1476,30 @@ function googleTranslateElementInit() {
     function render(data) {
         const results = document.getElementById('results');
         results.innerHTML = '';
-        data.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'word-card';
-            card.innerHTML = `
-                <span class="geez-text">${item.g}</span>
-                <div class="meaning-text">${item.m}</div>
-                <div class="tool-bar">
-                    <i class="fa-regular fa-heart" onclick="this.classList.toggle('fa-solid'); this.classList.toggle('active-icon')"></i>
-                    <i class="fa-regular fa-star" onclick="this.classList.toggle('fa-solid'); this.classList.toggle('active-icon')"></i>
-                    <i class="fa-regular fa-bookmark" onclick="this.classList.toggle('fa-solid'); this.classList.toggle('active-icon')"></i>
-                    <i class="fa-solid fa-share-nodes" onclick="shareWord('${item.g}')"></i>
-                </div>
-            `;
-            results.appendChild(card);
+        if (data.length === 0) {
+            results.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">ምንም ውጤት አልተገኘም...</p>';
+            return;
+        }
+
+        const grouped = data.reduce((acc, item) => {
+            const letter = item.l || 'ሌሎች';
+            if (!acc[letter]) acc[letter] = [];
+            acc[letter].push(item);
+            return acc;
+        }, {});
+
+        Object.keys(grouped).sort().forEach(letter => {
+            const section = document.createElement('div');
+            section.innerHTML = `<div style="font-size:1.5rem; color:var(--primary); border-bottom:2px solid var(--accent); margin:20px 0;">${letter}</div>`;
+            grouped[letter].forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'word-card';
+                card.innerHTML = `<span class="tag" style="background:#e3f2fd; color:#1565c0">${item.cat || 'ግሥ'}</span><span class="geez-text">${item.g}</span><div class="meaning-text">${item.m}</div>`;
+                section.appendChild(card);
+            });
+            results.appendChild(section);
         });
     }
-
     function shareWord(word) {
         const text = encodeURIComponent(`ቃል: ${word}\nተጨማሪ በ: ${window.location.href}`);
         window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`);
@@ -1518,31 +1515,48 @@ function googleTranslateElementInit() {
 
     const letters = ["ሀ", "ለ", "ሐ", "መ", "ሠ", "ረ", "ሰ", "ቀ", "በ", "ተ", "ኀ", "ነ", "አ", "ከ", "ወ", "ዐ", "ዘ", "የ", "ደ", "ገ", "ጠ", "ጰ", "ጸ", "ፀ", "ፈ", "ፐ"];
     const alphaList = document.getElementById('alphabetList');
-    letters.forEach(L => {
-        const span = document.createElement('span');
-        span.innerText = L;
-        span.onclick = () => { 
-            document.getElementById('searchInput').value = L; 
-            render(cleanDictionary.filter(i => i.g.startsWith(L))); 
-        };
-        alphaList.appendChild(span);
-    });
+    if(alphaList) {
+        alphaList.innerHTML = '';
+        letters.forEach(L => {
+            const span = document.createElement('span');
+            span.innerText = L;
+            span.onclick = () => { 
+                document.getElementById('searchInput').value = L; 
+                filterWords(L); 
+                window.scrollTo({top: 200, behavior: 'smooth'}); 
+            };
+            alphaList.appendChild(span);
+        });
+    }
 
     function toggleTheme() {
         document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     }
 
-    document.getElementById('searchInput').addEventListener('input', e => {
-        const q = e.target.value.trim();
-        render(cleanDictionary.filter(i => i.g.includes(q) || i.m.includes(q)));
-    });
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active-section'));
+        document.getElementById(id).classList.add('active-section');
+        document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
+        if(id === 'home') {
+            document.getElementById('nav-home').classList.add('active');
+            document.getElementById('alphabetList').style.display = 'flex';
+        } else {
+            document.getElementById('alphabetList').style.display = 'none';
+        }
+    }
 
-    window.onload = () => {
-        const word = cleanDictionary[Math.floor(Math.random() * cleanDictionary.length)];
-        document.getElementById('dw-geez').innerText = word.g;
-        document.getElementById('dw-meaning').innerText = word.m;
-        render(cleanDictionary);
+    function setDailyWord() {
+        if (cleanDictionary.length > 0) {
+            const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            const word = cleanDictionary[dayOfYear % cleanDictionary.length];
+            document.getElementById('dw-geez').innerText = word.g;
+            document.getElementById('dw-meaning').innerText = word.m;
+        }
+    }
+    
+    document.getElementById('searchInput').addEventListener('input', e => filterWords(e.target.value.trim()));
+    window.onload = () => { 
+        setDailyWord(); 
+        render(cleanDictionary); 
     };
-</script>
-</body>
-</html>
+</script
