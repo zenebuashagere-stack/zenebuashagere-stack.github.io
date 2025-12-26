@@ -5,166 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>መጽሐፈ ሰዋስው ወግሥ - Deacon Kewen Dejen</title>
 
-    <!-- 1. መሠረታዊ መሳርያዎች -->
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764197307756069" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root { 
-            --primary: #1b4332; --accent: #d4a373; --bg: #f4f7f6; --card: #ffffff; 
+            --primary: #1b4332; --accent: #d4a373; --bg: #f4f7f6; --white: #ffffff; 
             --text: #2d3436; --gold: #ffd700; --shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        [data-theme="dark"] { --bg: #000; --card: #1a1a1a; --text: #e0e0e0; --primary: #0a2318; }
+        [data-theme="dark"] { --bg: #121212; --card: #1e1e1e; --text: #f0f0f0; }
 
-        body { font-family: 'Noto Sans Ethiopic', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding-bottom: 90px; transition: 0.3s; overflow-x: hidden; }
+        body { font-family: 'Noto Sans Ethiopic', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding-bottom: 90px; }
 
-        /* Splash Screen */
-        #splash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--primary); display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; z-index: 9999; transition: 0.8s; }
-        .spinner { border: 4px solid rgba(255,255,255,0.3); border-top: 4px solid var(--accent); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-top: 20px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* ፈጣን Header */
+        header { 
+            background: var(--primary); color: white; padding: 15px 20px; 
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 4px solid var(--accent); position: sticky; top: 0; z-index: 1001;
+        }
 
-        /* Header & Auth */
-        header { background: var(--primary); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid var(--accent); position: sticky; top: 0; z-index: 1001; }
-        .user-box { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .avatar { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--accent); background: white; color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        /* የቋንቋ መቀየሪያ */
+        #google_translate_element { background: white; border-bottom: 1px solid #ddd; text-align: center; padding: 5px; }
 
-        /* Alphabet Scroller */
-        .alphabet-list { display: flex; overflow-x: auto; background: var(--card); padding: 12px; gap: 10px; position: sticky; top: 65px; z-index: 999; box-shadow: var(--shadow); scrollbar-width: none; }
-        .alphabet-list span { padding: 8px 18px; background: #f0f0f0; border-radius: 12px; cursor: pointer; font-weight: bold; color: var(--primary); white-space: nowrap; }
-
-        /* Language & Translator */
-        #google_translate_element { display: none; }
-        .lang-btn-group { display: flex; overflow-x: auto; gap: 8px; padding: 10px; background: white; scrollbar-width: none; }
-        .lang-btn { padding: 5px 12px; border: 1px solid var(--primary); border-radius: 15px; font-size: 0.8rem; cursor: pointer; white-space: nowrap; }
+        /* ፊደላት Scroller */
+        .alphabet-list { display: flex; overflow-x: auto; background: white; padding: 12px; gap: 8px; position: sticky; top: 65px; z-index: 999; box-shadow: var(--shadow); scrollbar-width: none; }
+        .alphabet-list span { padding: 8px 18px; background: #f0f0f0; border-radius: 12px; cursor: pointer; font-weight: bold; color: var(--primary); white-space: nowrap; border: 1px solid #ddd; }
 
         .container { max-width: 800px; margin: 0 auto; padding: 15px; }
-        .daily-card { background: linear-gradient(135deg, var(--primary), #2d6a4f); color: white; padding: 25px; border-radius: 20px; margin-bottom: 20px; text-align: center; box-shadow: var(--shadow); }
-
-        /* Word Card with Tools */
-        .word-card { background: var(--card); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: var(--shadow); border-left: 8px solid var(--primary); animation: slideUp 0.5s ease-out; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .geez-text { font-size: 2rem; font-weight: 700; color: var(--primary); }
-        .pos-badge { background: #eee; padding: 2px 8px; border-radius: 5px; font-size: 0.8rem; margin-bottom: 10px; display: inline-block; color: #555; }
         
-        .tool-bar { display: flex; justify-content: space-around; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; }
-        .tool-bar div { text-align: center; cursor: pointer; color: #636e72; font-size: 0.8rem; }
-        .tool-bar div:hover { color: var(--accent); }
+        .daily-card { background: linear-gradient(135deg, var(--primary), #2d6a4f); color: white; padding: 20px; border-radius: 20px; margin-bottom: 20px; text-align: center; box-shadow: var(--shadow); }
+
+        .search-box { width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #ddd; font-size: 16px; outline: none; background: white; box-sizing: border-box; margin-bottom: 20px; }
+
+        /* የቃላት ካርድ */
+        .word-card { background: white; border-radius: 15px; padding: 22px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--primary); }
+        .geez-text { font-size: 1.8rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 5px; }
+        
+        .tool-bar { display: flex; justify-content: space-around; margin-top: 15px; padding-top: 12px; border-top: 1px solid #eee; color: #636e72; }
+        .tool-bar i { cursor: pointer; }
         .active-red { color: #e74c3c !important; }
         .active-gold { color: var(--gold) !important; }
 
-        /* Floating Action Buttons */
-        .fab { position: fixed; right: 20px; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 1000; }
-        .chat-fab { bottom: 170px; background: var(--accent); }
-        .top-fab { bottom: 100px; background: var(--primary); display: none; }
-
-        /* Bottom Navigation */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 12px 0; z-index: 2000; }
+        /* የታችኛው Nav */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 12px 0; z-index: 2000; border-top: 2px solid var(--accent); }
         .bottom-nav a { color: #ccc; text-decoration: none; font-size: 0.8rem; text-align: center; cursor: pointer; }
         .bottom-nav a.active { color: var(--accent); font-weight: bold; }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center; }
-        .modal-content { background: var(--card); padding: 30px; border-radius: 25px; width: 90%; max-width: 400px; }
-        
         .section { display: none; }
         .active-section { display: block; }
     </style>
 </head>
-<body data-theme="light">
-
-<!-- Splash Screen -->
-<div id="splash">
-    <h1 style="font-size: 2.5rem; margin:0;">ሰዋስው ወግሥ</h1>
-    <p>ዲያቆን ከውን ደጀን</p>
-    <div class="spinner"></div>
-</div>
+<body>
 
 <header>
-    <div class="user-box" onclick="showSection('profile')">
-        <div class="avatar" id="userAvatar">?</div>
-        <span id="userName" style="font-size:0.9rem;">Sign In</span>
+    <div class="logo-area"><h2 style="margin:0; font-size: 1.2rem;">መጽሐፈ ሰዋስው ወግሥ</h2></div>
+    <div style="display:flex; gap:10px;">
+        <div onclick="toggleTheme()" style="cursor:pointer; font-size: 1.2rem;">🌓</div>
+        <button onclick="alert('በቅርቡ ይጀምራል!')" style="background:var(--accent); border:none; color:white; padding:5px 12px; border-radius:15px; cursor:pointer; font-weight:bold;">Login</button>
     </div>
-    <div style="font-weight: bold; font-size: 1.2rem;">መጽሐፈ ሰዋስው</div>
-    <div onclick="toggleTheme()" style="cursor:pointer; font-size: 1.3rem;">🌓</div>
 </header>
 
-<!-- ትርጉም መቆጣጠሪያ -->
-<div class="lang-btn-group">
-    <button class="lang-btn" onclick="translateTo('am')">አማርኛ</button>
-    <button class="lang-btn" onclick="translateTo('om')">Oromoo</button>
-    <button class="lang-btn" onclick="translateTo('ti')">ትግርኛ</button>
-    <button class="lang-btn" onclick="translateTo('en')">English</button>
-    <button class="lang-btn" onclick="translateTo('ar')">العربية</button>
-    <button class="lang-btn" onclick="translateTo('he')">עברית</button>
-    <button class="lang-btn" onclick="translateTo('de')">Deutsch</button>
-    <button class="lang-btn" onclick="translateTo('fr')">Français</button>
-    <button class="lang-btn" onclick="translateTo('zh-CN')">中文</button>
-</div>
 <div id="google_translate_element"></div>
-
 <div class="alphabet-list" id="alphabetList"></div>
 
 <main class="container">
-    <!-- Home Section -->
     <div id="home" class="section active-section">
         <div class="daily-card" id="dailyWordCard">
-            <small>የዕለቱ የጥበብ ቃል</small>
-            <h2 id="dw-geez" style="margin:10px 0;">ሀለወ</h2>
-            <p id="dw-meaning">ነበረ፣ ኖረ፣ ተገኘ።</p>
-            <i style="font-size: 0.8rem; opacity: 0.8;">(፩ዮሐ ፭፡፯)</i>
+            <small>የዕለቱ ቃል</small>
+            <h2 id="dw-geez" style="margin:5px 0;">ሀለወ</h2>
+            <p id="dw-meaning" style="margin:0;">ነበረ፣ ኖረ።</p>
         </div>
-
         <input type="text" id="searchInput" class="search-box" placeholder="የግዕዝ ቃል ይፈልጉ..." autocomplete="off">
-        
         <div id="results"></div>
     </div>
 
-    <!-- Bookmarks Section -->
-    <div id="bookmarks" class="section">
-        <h2 style="color:var(--primary); text-align:center;">🔖 የተቀመጡ ቃላት</h2>
-        <div id="bookmarkResults"></div>
-    </div>
-
-    <!-- Profile Section -->
-    <div id="profile" class="section">
-        <div class="word-card" style="text-align:center;">
-            <div style="width:100px; height:100px; background:var(--primary); color:white; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-size:3rem;" id="profLargeAvatar">?</div>
-            <h2 id="profName">ተጠቃሚ</h2>
-            <p id="profEmail">ለመመዝገብ ከታች ይግቡ</p>
-            <button onclick="openLogin()" id="loginBtn" style="background:var(--accent); color:white; border:none; padding:12px 30px; border-radius:25px; font-weight:bold; cursor:pointer;">Log In / Sign Up</button>
-            <button onclick="handleLogout()" id="logoutBtn" style="display:none; background:#e74c3c; color:white; border:none; padding:12px 30px; border-radius:25px; font-weight:bold; cursor:pointer;">Log Out</button>
+    <div id="about" class="section">
+        <div class="word-card">
+            <h2>📜 ስለ ፕሮጀክቱ</h2>
+            <p>ጥንታዊውን የግዕዝ ቋንቋ ሥርዓት ለዲጂታል ትውልድ ለማቅረብ የታለመ መድረክ።</p>
+            <hr>
+            <p><b>Developed by:</b> Deacon Kewen Dejen</p>
+            <p><b>Email:</b> zenebuashager@gmail.com</p>
+            <p><b>Phone:</b> +251980520360</p>
         </div>
     </div>
 </main>
 
-<!-- Floating Buttons -->
-<div class="fab chat-fab" onclick="window.open('https://t.me/zenebuashager')"><i class="fa-solid fa-comments fa-lg"></i></div>
-<div class="fab top-fab" id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})"><i class="fa-solid fa-arrow-up"></i></div>
-
 <nav class="bottom-nav">
     <a onclick="showSection('home')" id="nav-home" class="active"><i class="fa-solid fa-search"></i><br>መፈለጊያ</a>
-    <a onclick="showSection('bookmarks')" id="nav-bookmarks"><i class="fa-solid fa-bookmark"></i><br>ሴቭ</a>
-    <a onclick="showSection('profile')" id="nav-profile"><i class="fa-solid fa-user-circle"></i><br>መለያ</a>
+    <a onclick="showSection('about')" id="nav-about"><i class="fa-solid fa-info-circle"></i><br>ስለ እኛ</a>
+    <a href="https://t.me/zenebuashager" target="_blank"><i class="fa-solid fa-comment-dots"></i><br>እርዳታ</a>
 </nav>
 
-<!-- Auth Modal -->
-<div id="authModal" class="modal">
-    <div class="modal-content" style="text-align:center;">
-        <h2 style="color:var(--primary);">እንኳን ደህና መጡ</h2>
-        <p>በጎግል መለያዎ ፈጥነው ይግቡ</p>
-        <button onclick="googleLogin()" style="background:#db4437; color:white; border:none; padding:12px; border-radius:15px; width:100%; cursor:pointer; font-weight:bold;"><i class="fa-brands fa-google"></i> Continue with Google</button>
-        <p style="margin-top:20px; font-size:0.8rem; color:#999;">Email login and Registration coming soon.</p>
-        <button onclick="closeLogin()" style="background:#eee; border:none; padding:10px; margin-top:10px; border-radius:10px; width:100%;">ዝጋ</button>
-    </div>
-</div>
-
 <script>
-    // --- 1. FIREBASE CONFIG ( እዚህ ጋር የራስህን ቁልፍ መቀየር ትችላለህ) ---
-    const firebaseConfig = { apiKey: "AIzaSyAs-DEMO-KEY", authDomain: "geez-dictionary.firebaseapp.com", projectId: "geez-dictionary" };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
     // --- እኔ ዲያቆን ከውን ደጀን - ያቀረብኳቸው በመቶዎች የሚቆጠሩ ቃላት ሰንሰለት እዚህ ይገኛል ---
     const dictionaryRaw = [
         // ክፍል አንድ
@@ -1887,10 +1823,7 @@
     function render(data) {
         const results = document.getElementById('results');
         results.innerHTML = '';
-        if (data.length === 0) {
-            results.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">ምንም አልተገኘም...</p>';
-            return;
-        }
+        if (data.length === 0) { results.innerHTML = '<p style="text-align:center; margin-top:50px;">አልተገኘም</p>'; return; }
 
         const grouped = data.reduce((acc, item) => {
             const letter = item.l || 'ሌሎች';
@@ -1901,7 +1834,7 @@
 
         Object.keys(grouped).sort().forEach(letter => {
             const section = document.createElement('div');
-            section.innerHTML = `<div style="font-size:1.5rem; color:var(--primary); border-bottom:2px solid var(--accent); margin:20px 0;">${letter}</div>`;
+            section.innerHTML = `<div style="font-size:1.4rem; color:var(--primary); border-bottom:2px solid var(--accent); margin:25px 0 10px;">${letter}</div>`;
             grouped[letter].forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'word-card';
@@ -1910,7 +1843,7 @@
                     <div class="meaning-text">${item.m}</div>
                     <div class="tool-bar">
                         <i class="fa-regular fa-heart" onclick="this.classList.toggle('fa-solid'); this.classList.toggle('active-red')"></i>
-                        <i class="fa-regular fa-star" onclick="this.classList.toggle('fa-solid'); this.classList.toggle('active-icon')"></i>
+                        <i class="fa-regular fa-star" onclick="this.classList.toggle('fa-solid'); this.classList.toggle('active-gold')"></i>
                         <i class="fa-solid fa-share-nodes" onclick="shareWord('${item.g}')"></i>
                     </div>
                 `;
@@ -1930,16 +1863,18 @@
     letters.forEach(L => {
         const span = document.createElement('span');
         span.innerText = L;
-        span.onclick = () => { 
-            document.getElementById('searchInput').value = L; 
-            render(dictionary.filter(i => i.g.startsWith(L))); 
-            window.scrollTo({top: 200, behavior: 'smooth'});
-        };
+        span.onclick = () => { document.getElementById('searchInput').value = L; render(dictionary.filter(i => i.g.startsWith(L))); window.scrollTo({top: 400, behavior: 'smooth'}); };
         alphaList.appendChild(span);
     });
 
+    document.getElementById('searchInput').addEventListener('input', e => {
+        const q = e.target.value.trim();
+        render(dictionary.filter(i => i.g.includes(q) || i.m.includes(q)));
+    });
+
     function toggleTheme() {
-        document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+        const body = document.body;
+        body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     }
 
     function showSection(id) {
@@ -1947,15 +1882,11 @@
         document.getElementById(id).classList.add('active-section');
         document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
         document.getElementById('nav-' + (id === 'home' ? 'home' : 'about')).classList.add('active');
+        window.scrollTo(0,0);
     }
 
-    document.getElementById('searchInput').addEventListener('input', e => {
-        const q = e.target.value.trim();
-        render(dictionary.filter(i => i.g.includes(q) || i.m.includes(q)));
-    });
-
     function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'am', includedLanguages: 'am,om,ti,en,ar,he,de,fr,zh-CN'}, 'google_translate_element');
+        new google.translate.TranslateElement({pageLanguage: 'am', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
     }
 
     window.onload = () => {
