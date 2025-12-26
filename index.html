@@ -9,119 +9,153 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764197307756069" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
         :root { 
             --primary: #1b4332; --accent: #d4a373; --bg: #f4f7f6; --card: #ffffff; 
-            --text: #2d3436; --gold: #ffd700; --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --text: #2d3436; --gold: #ffd700; --red: #e74c3c; --shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         [data-theme="dark"] { --bg: #121212; --card: #1e1e1e; --text: #f5f5f5; --primary: #2d6a4f; }
 
         body { font-family: 'Noto Sans Ethiopic', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding-bottom: 90px; transition: 0.3s; overflow-x: hidden; }
 
-        header { 
-            background: var(--primary); color: white; padding: 15px 20px; 
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 4px solid var(--accent); position: sticky; top: 0; z-index: 1100;
-        }
+        /* Header */
+        header { background: var(--primary); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid var(--accent); position: sticky; top: 0; z-index: 1100; }
 
         /* Sidebar Menu */
         .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: var(--card); z-index: 1300; transition: 0.4s; box-shadow: 10px 0 30px rgba(0,0,0,0.2); overflow-y: auto; }
         .sidebar.active { left: 0; }
-        .sidebar-header { background: var(--primary); color: white; padding: 30px 20px; border-bottom: 3px solid var(--accent); }
-        .menu-item { padding: 15px 25px; display: flex; align-items: center; gap: 15px; cursor: pointer; border-bottom: 1px solid #eee; font-weight: 500; }
-        .menu-item i { width: 20px; color: var(--primary); }
+        .sidebar-header { background: var(--primary); color: white; padding: 30px 20px; text-align: center; border-bottom: 3px solid var(--accent); }
 
-        /* Alphabet Scroller (Horizontal) */
+        /* Dual Alphabet Index */
         .alphabet-list { display: flex; overflow-x: auto; background: var(--card); padding: 10px; gap: 8px; position: sticky; top: 60px; z-index: 999; box-shadow: var(--shadow); scrollbar-width: none; }
-        .alphabet-list span { padding: 8px 18px; background: #f0f0f0; border-radius: 10px; cursor: pointer; font-weight: bold; color: var(--primary); white-space: nowrap; }
-
-        .container { max-width: 800px; margin: 0 auto; padding: 15px; }
-
-        .search-box { width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #ddd; font-size: 16px; outline: none; background: var(--card); color: var(--text); margin: 15px 0; box-shadow: var(--shadow); }
-
-        /* Word Cards */
-        .word-card { background: var(--card); border-radius: 15px; padding: 25px; margin-bottom: 15px; box-shadow: var(--shadow); border-left: 8px solid var(--primary); animation: fadeIn 0.4s; }
-        .geez-text { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+        .alphabet-list span { padding: 8px 18px; background: #f0f0f0; border-radius: 10px; cursor: pointer; font-weight: bold; color: var(--primary); }
         
-        /* Tool Bar Inside Card */
-        .tool-bar { display: flex; justify-content: flex-start; gap: 25px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 12px; color: #636e72; }
-        .tool-bar div { display: flex; align-items: center; gap: 5px; font-size: 0.8rem; cursor: pointer; }
-        .active-heart { color: #e74c3c !important; }
-        .active-star { color: var(--gold) !important; }
+        .vertical-index { position: fixed; right: 5px; top: 120px; height: 75vh; width: 35px; background: rgba(255, 255, 255, 0.9); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: space-around; font-size: 0.75rem; font-weight: bold; color: var(--primary); z-index: 1000; border: 1px solid var(--accent); }
 
-        /* Bottom Nav */
+        .container { max-width: 800px; margin: 0 auto; padding: 15px; padding-right: 45px; }
+
+        /* Search area */
+        .search-area { background: var(--card); border-radius: 25px; padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow); }
+        .search-box { width: 100%; padding: 15px 20px; border-radius: 30px; border: 1px solid #ddd; outline: none; font-size: 16px; background: var(--bg); color: var(--text); }
+        .filter-modes { display: flex; justify-content: center; gap: 15px; margin-top: 12px; font-size: 0.85rem; font-weight: bold; color: var(--primary); }
+
+        /* Word Card */
+        .word-card { background: var(--card); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: var(--shadow); border-left: 8px solid var(--primary); position: relative; }
+        .tool-bar { display: flex; justify-content: space-between; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; color: #636e72; font-size: 0.75rem; }
+        .tool-btn { cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+
+        /* Sections */
+        .section { display: none; }
+        .active-section { display: block; animation: fadeIn 0.4s; }
+
+        /* AI Chat UI */
+        .chat-container { height: 60vh; display: flex; flex-direction: column; }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 15px; background: #eee; border-radius: 15px; margin-bottom: 10px; }
+        .msg { padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; max-width: 80%; }
+        .msg.ai { background: var(--primary); color: white; align-self: flex-start; }
+        .msg.user { background: var(--accent); color: white; align-self: flex-end; margin-left: auto; }
+
+        /* Quiz UI */
+        .quiz-card { background: var(--card); padding: 30px; border-radius: 20px; text-align: center; box-shadow: var(--shadow); }
+        .option-btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border-radius: 12px; border: 1px solid #ddd; background: white; cursor: pointer; transition: 0.3s; }
+        .option-btn:hover { background: #f0f0f0; }
+
+        /* Modal for Registration */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 3000; display: none; justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 40px; border-radius: 30px; text-align: center; width: 90%; max-width: 400px; }
+
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1200; border-top: 2px solid var(--accent); }
-        .bottom-nav a { color: #ccc; text-decoration: none; font-size: 0.8rem; text-align: center; cursor: pointer; }
+        .bottom-nav a { color: #ccc; text-decoration: none; font-size: 0.75rem; text-align: center; cursor: pointer; }
         .bottom-nav a.active { color: var(--accent); font-weight: bold; }
 
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1250; display: none; }
-        .section { display: none; }
-        .active-section { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body data-theme="light">
 
-<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<!-- Registration Modal -->
+<div class="modal" id="regModal">
+    <div class="modal-content">
+        <i class="fa-solid fa-user-plus fa-3x" style="color: var(--primary);"></i>
+        <h2 style="color:var(--primary)">ሰዋስው ወግሥ አባልነት</h2>
+        <p>ስምዎን ያስገቡና ጉዞዎን ይጀምሩ</p>
+        <input type="text" id="regNameInput" placeholder="ሙሉ ስም">
+        <button onclick="registerUser()" style="background:var(--primary); color:white; border:none; padding:12px 40px; border-radius:15px; cursor:pointer;">ይመዝገቡ</button>
+    </div>
+</div>
 
-<!-- Sidebar Menu -->
 <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <h3>ሰዋስው ወግሥ</h3>
-        <p>ዲያቆን ከውን ደጀን</p>
+        <i class="fa-solid fa-circle-user fa-4x"></i>
+        <h3 id="userNameDisplay">እንግዳ</h3>
+        <p>የሰዋስው ወግሥ ቤተሰብ</p>
     </div>
-    <div class="menu-item" onclick="alert('የምዝገባ አገልግሎት በቅርቡ ይጀምራል!')"><i class="fa-solid fa-user-lock"></i> መግቢያ (Login)</div>
-    <div class="menu-item" onclick="showSection('history')"><i class="fa-solid fa-clock-rotate-left"></i> የታዩ ቃላት (History)</div>
-    <div class="menu-item" onclick="showSection('favs')"><i class="fa-solid fa-star"></i> የተመረጡ (Favorites)</div>
+    <div class="menu-item" onclick="openAuth()"><i class="fa-solid fa-user-gear"></i> መገለጫዬን ቀይር</div>
     <div class="menu-item" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i> ገጽታ (Dark/Light)</div>
-    <div class="menu-item" onclick="window.open('https://facebook.com/zenebuashager')"><i class="fa-brands fa-facebook"></i> Facebook</div>
+    <div class="menu-item" onclick="window.open('https://facebook.com/zenebuashager')"><i class="fa-brands fa-facebook"></i> Facebook & ስልክ</div>
     <div class="menu-item" onclick="window.open('tel:+251980520360')"><i class="fa-solid fa-phone"></i> በስልክ ያግኙን</div>
 </div>
 
 <header>
-    <div onclick="openMenu()" style="cursor:pointer"><i class="fa-solid fa-bars fa-lg"></i></div>
-    <div style="font-weight: bold; letter-spacing: 1px;">መጽሐፈ ሰዋስው ወግሥ</div>
-    <div onclick="toggleTheme()" style="cursor:pointer"><i class="fa-solid fa-moon fa-lg"></i></div>
+    <div onclick="document.getElementById('sidebar').classList.add('active')"><i class="fa-solid fa-bars-staggered fa-lg"></i></div>
+    <div style="font-weight: bold;">መጽሐፈ ሰዋስው ወግሥ</div>
+    <div onclick="toggleTheme()"><i class="fa-solid fa-moon fa-lg"></i></div>
 </header>
 
-<div class="alphabet-list" id="alphabetList"></div>
+<div class="alphabet-list" id="alphaH"></div>
+<div class="vertical-index" id="alphaV"></div>
 
 <main class="container">
-    <!-- Home Section -->
+    <!-- Home / Search -->
     <div id="home" class="section active-section">
-        <input type="text" id="searchInput" class="search-box" placeholder="ቃል ወይም ትርጉም ይፈልጉ..." autocomplete="off">
+        <div class="search-area">
+            <input type="text" id="searchInput" class="search-box" placeholder="ቃል ይፈልጉ..." autocomplete="off">
+            <div class="filter-modes">
+                <label><input type="radio" name="mode" value="start" checked onclick="filter()"> መጀመሪያ</label>
+                <label><input type="radio" name="mode" value="end" onclick="filter()"> መጨረሻ</label>
+            </div>
+        </div>
         <div id="results"></div>
     </div>
 
-    <!-- History Section -->
-    <div id="history" class="section">
-        <h2 style="color: var(--primary);"><i class="fa-solid fa-clock-rotate-left"></i> የታዩ ቃላት (History)</h2>
-        <button onclick="clearHistory()" style="background:#eee; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">ታሪክ አጽዳ</button>
-        <div id="historyResults" style="margin-top:20px;"></div>
-    </div>
-
-    <!-- Favorites Section -->
-    <div id="favs" class="section">
-        <h2 style="color: var(--gold);"><i class="fa-solid fa-star"></i> የተመረጡ ቃላት (Favorites)</h2>
-        <div id="favResults"></div>
-    </div>
-
-    <!-- About Section -->
-    <div id="about" class="section">
-        <div class="word-card">
-            <h2>📜 ስለ ፕሮጀክቱ</h2>
-            <p>በዲያቆን ከውን ደጀን የተዘጋጀ የግዕዝ ቋንቋ ማጥኛ መድረክ።</p>
-            <p>📞 ስልክ፡ +251980520360</p>
+    <!-- AI Chat -->
+    <div id="aiChat" class="section">
+        <h2 style="color:var(--primary)">🤖 ግዕዝ AI ረዳት</h2>
+        <div class="chat-container">
+            <div class="chat-messages" id="chatBox">
+                <div class="msg ai">ሰላም! እኔ የግዕዝ ቋንቋ ረዳት ነኝ። ማንኛውንም ጥያቄ ይጠይቁኝ።</div>
+            </div>
+            <div style="display:flex; gap:10px;">
+                <input type="text" id="aiInput" class="search-box" style="margin:0" placeholder="ጥያቄዎን እዚህ ይጻፉ...">
+                <button onclick="askAI()" style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:30px;"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
         </div>
     </div>
+
+    <!-- Exam / Quiz -->
+    <div id="exam" class="section">
+        <h2 style="color:var(--primary)">📝 የግዕዝ ፈተና (Exam)</h2>
+        <div id="quizArea" class="quiz-card">
+            <h3>ለመፈተን ዝግጁ ኖት?</h3>
+            <p>ሲስተሙ አዳዲስ ጥያቄዎችን በየደቂቃው ያወጣልዎታል።</p>
+            <button onclick="startQuiz()" style="background:var(--primary); color:white; border:none; padding:15px 30px; border-radius:15px; cursor:pointer;">ፈተና ጀምር (Start Exam)</button>
+        </div>
+    </div>
+
+    <!-- Favorites -->
+    <div id="favs" class="section"><h2>⭐ የተመረጡ</h2><div id="favResults"></div></div>
+
+    <!-- History -->
+    <div id="history" class="section"><h2>🕒 ታሪክ</h2><div id="historyResults"></div></div>
 </main>
 
 <nav class="bottom-nav">
-    <a onclick="showSection('home')" id="nav-home" class="active"><i class="fa-solid fa-house"></i><br>መፈለጊያ</a>
-    <a onclick="showSection('history')"><i class="fa-solid fa-history"></i><br>ታሪክ</a>
-    <a onclick="showSection('favs')"><i class="fa-solid fa-star"></i><br>የተመረጡ</a>
+    <a onclick="showSection('home')" id="nav-home" class="active"><i class="fa-solid fa-magnifying-glass"></i><br>መፈለጊያ</a>
+    <a onclick="showSection('aiChat')"><i class="fa-solid fa-robot"></i><br>AI ረዳት</a>
+    <a onclick="showSection('exam')"><i class="fa-solid fa-graduation-cap"></i><br>ፈተና</a>
+    <a onclick="showSection('favs')"><i class="fa-solid fa-bookmark"></i><br>የተመረጡ</a>
 </nav>
 
 <script>
@@ -1836,93 +1870,122 @@
         { g: "ፍኖተ ፡ ጥበብ", t: "ስም", m: "ትርጓሜሁ - የጥበብ መንገድ። ጥቅስ - 'አርአየኒ ፍኖተ ጥበብ' (መዝ ፲፭፡፲፩)", l: "ፈ", cat: "ዘርፍ" }
     ];
 
+   let user = localStorage.getItem('geez_user');
     let favorites = JSON.parse(localStorage.getItem('geez_favs')) || [];
     let history = JSON.parse(localStorage.getItem('geez_history')) || [];
 
+    // --- ምዝገባ ሲስተም ---
+    function registerUser() {
+        const name = document.getElementById('regNameInput').value;
+        if(name) { localStorage.setItem('geez_user', name); location.reload(); }
+    }
+
+    // --- AI Chat Logic ---
+    function askAI() {
+        const input = document.getElementById('aiInput');
+        const box = document.getElementById('chatBox');
+        if(!input.value) return;
+
+        box.innerHTML += `<div class="msg user">${input.value}</div>`;
+        const q = input.value;
+        input.value = '';
+
+        setTimeout(() => {
+            let reply = "ጥያቄዎን ተመልክቻለሁ። እንደ ባለሙያዬ 'ዲያቆን ከውን ደጀን' አስተማሪነት፣ ይህ ቃል በሰዋስው ወግሥ ሥርዓት መሠረት እንዲህ ይፈታል...";
+            const found = dictionary.find(i => q.includes(i.g));
+            if(found) reply = `${found.g} ማለት ${found.m} ማለት ነው። ሌላ ምን ማወቅ ይፈልጋሉ?`;
+            box.innerHTML += `<div class="msg ai">${reply}</div>`;
+            box.scrollTop = box.scrollHeight;
+        }, 1000);
+    }
+
+    // --- Exam / Quiz Logic ---
+    function startQuiz() {
+        const quizArea = document.getElementById('quizArea');
+        const randomItem = dictionary[Math.floor(Math.random() * dictionary.length)];
+        const distractors = dictionary.filter(i => i.g !== randomItem.g).sort(() => 0.5 - Math.random()).slice(0, 2);
+        const options = [randomItem, ...distractors].sort(() => 0.5 - Math.random());
+
+        quizArea.innerHTML = `
+            <h3>የዚህ ቃል ትርጉም ምንድን ነው?</h3>
+            <h1 style="color:var(--primary)">${randomItem.g}</h1>
+            ${options.map(opt => `<button class="option-btn" onclick="checkAnswer('${opt.g}', '${randomItem.g}')">${opt.m}</button>`).join('')}
+        `;
+    }
+
+    function checkAnswer(chosen, correct) {
+        if(chosen === correct) alert("ትክክል ነዎት! ጎበዝ!");
+        else alert("አልተሳካም! ትክክለኛው መልስ " + correct + " ነበረ።");
+        startQuiz();
+    }
+
+    // --- Rendering & Index ---
     function render(data, targetId = 'results') {
         const target = document.getElementById(targetId);
         target.innerHTML = '';
-        if(data.length === 0) { target.innerHTML = '<p style="text-align:center; color:#999;">ምንም አልተገኘም...</p>'; return; }
-
         data.forEach(item => {
             const isFav = favorites.some(f => f.g === item.g);
             const card = document.createElement('div');
             card.className = 'word-card';
-            card.onclick = () => addToHistory(item);
             card.innerHTML = `
                 <span class="geez-text">${item.g}</span>
                 <div class="meaning-text">${item.m}</div>
                 <div class="tool-bar">
-                    <div onclick="toggleFavorite(event, '${item.g}')">
-                        <i class="fa-solid fa-star ${isFav ? 'active-star' : ''}"></i> መረጥኩት
+                    <div class="tool-btn" onclick="toggleFav('${item.g}')">
+                        <i class="fa-solid fa-bookmark ${isFav ? 'active-star' : ''}"></i> Bookmark
                     </div>
-                    <div onclick="shareWord('${item.g}')">
-                        <i class="fa-solid fa-share-nodes"></i> አጋራ
+                    <div class="tool-btn" onclick="shareWord('${item.g}')">
+                        <i class="fa-solid fa-share-nodes"></i> Share
                     </div>
-                </div>
-            `;
+                </div>`;
             target.appendChild(card);
         });
     }
 
-    function addToHistory(item) {
-        if(!history.some(h => h.g === item.g)) {
-            history.unshift(item);
-            if(history.length > 20) history.pop();
-            localStorage.setItem('geez_history', JSON.stringify(history));
-        }
-    }
-
-    function toggleFavorite(event, geez) {
-        event.stopPropagation();
-        const item = dictionaryData.find(i => i.g === geez);
-        const index = favorites.findIndex(f => f.g === geez);
-        if(index > -1) favorites.splice(index, 1);
-        else favorites.push(item);
+    function toggleFav(g) {
+        const item = dictionary.find(i => i.g === g);
+        const idx = favorites.findIndex(f => f.g === g);
+        if(idx > -1) favorites.splice(idx, 1); else favorites.push(item);
         localStorage.setItem('geez_favs', JSON.stringify(favorites));
-        applyFilters();
-        if(document.getElementById('favs').classList.contains('active-section')) render(favorites, 'favResults');
+        filter();
     }
 
-    function clearHistory() { history = []; localStorage.removeItem('geez_history'); render(history, 'historyResults'); }
-
-    function openMenu() { document.getElementById('sidebar').classList.add('active'); document.getElementById('overlay').style.display = 'block'; }
-    function closeMenu() { document.getElementById('sidebar').classList.remove('active'); document.getElementById('overlay').style.display = 'none'; }
+    function filter() {
+        const q = document.getElementById('searchInput').value.trim();
+        const mode = document.querySelector('input[name="mode"]:checked').value;
+        let f = dictionary;
+        if(q) {
+            if(mode === 'start') f = f.filter(i => i.g.startsWith(q) || i.m.includes(q));
+            else f = f.filter(i => i.g.endsWith(q));
+        }
+        render(f);
+    }
 
     function showSection(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active-section'));
         document.getElementById(id).classList.add('active-section');
         document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
-        if(id === 'home') render(dictionaryData);
-        if(id === 'history') render(history, 'historyResults');
         if(id === 'favs') render(favorites, 'favResults');
-        closeMenu();
+        if(id === 'home') render(dictionary);
+        document.getElementById('sidebar').classList.remove('active');
+        window.scrollTo(0,0);
     }
 
-    function toggleTheme() {
-        const body = document.body;
-        const theme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        body.setAttribute('data-theme', theme);
-    }
+    function toggleTheme() { document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
 
-    function shareWord(geez) { window.open(`https://t.me/share/url?url=${window.location.href}&text=የግዕዝ ቃል: ${geez}`); }
-
-    const letters = ["ሀ", "ለ", "ሐ", "መ", "ሠ", "ረ", "ሰ", "ቀ", "በ", "ተ", "ኀ", "ነ", "አ", "ከ", "ወ", "ዐ", "ዘ", "የ", "ደ", "ገ", "ጠ", "ጰ", "ጸ", "ፀ", "ፈ", "ፐ"];
-    const alphaList = document.getElementById('alphabetList');
-    letters.forEach(L => {
-        const span = document.createElement('span'); span.innerText = L;
-        span.onclick = () => { document.getElementById('searchInput').value = L; applyFilters(); };
-        alphaList.appendChild(span);
-    });
-
-    function applyFilters() {
-        const q = document.getElementById('searchInput').value.trim();
-        const filtered = dictionaryData.filter(i => i.g.includes(q) || i.m.includes(q));
-        render(filtered);
-    }
-
-    document.getElementById('searchInput').addEventListener('input', applyFilters);
-    window.onload = () => render(dictionaryData);
+    window.onload = () => {
+        if(!user) document.getElementById('regModal').style.display = 'flex';
+        else document.getElementById('userNameDisplay').innerText = user;
+        
+        const h = document.getElementById('alphaH');
+        const v = document.getElementById('alphaV');
+        const letters = ["ሀ", "ለ", "ሐ", "መ", "ሠ", "ረ", "ሰ", "ቀ", "በ", "ተ", "ኀ", "ነ", "አ", "ከ", "ወ", "ዐ", "ዘ", "የ", "ደ", "ገ", "ጠ", "ጰ", "ጸ", "ፀ", "ፈ", "ፐ"];
+        letters.forEach(L => {
+            const s1 = document.createElement('span'); s1.innerText = L; s1.onclick = () => { document.getElementById('searchInput').value = L; filter(); }; h.appendChild(s1);
+            const s2 = document.createElement('span'); s2.innerText = L; s2.onclick = () => { document.getElementById('searchInput').value = L; filter(); }; v.appendChild(s2);
+        });
+        render(dictionary);
+    };
 </script>
 </body>
 </html>
