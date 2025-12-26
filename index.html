@@ -1878,77 +1878,51 @@
 
      function getUniqueWords(data) {
         const unique = []; const seen = new Set();
-        data.forEach(i => { if (!seen.has(i.g)) { seen.add(i.g); unique.push(i); } });
+        data.forEach(item => { if (!seen.has(item.g)) { seen.add(item.g); unique.push(item); } });
         return unique;
     }
-    const dictionary = getUniqueWords(rawData);
 
-    // --- 3. UI FUNCTIONS ---
-    function render(data, targetId = 'results') {
-        const container = document.getElementById(targetId);
-        container.innerHTML = '';
-        if (data.length === 0) { container.innerHTML = '<p style="text-align:center; margin-top:50px;">ምንም አልተገኘም...</p>'; return; }
+    const dictionary = getUniqueWords(dictionaryData);
 
-        data.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'word-card';
-            card.innerHTML = `
-                <span class="pos-badge">${item.p || 'ቃል'}</span>
-                <div class="geez-text">${item.g}</div>
-                <div class="meaning-text">${item.m}</div>
-                ${item.ex ? `<div style="margin-top:10px; color:var(--accent); font-style:italic; border-left:3px solid var(--accent); padding-left:10px;">ጥቅስ፡ ${item.ex}</div>` : ''}
-                <div class="tool-bar">
-                    <div onclick="interact(this, 'red')"><i class="fa-regular fa-heart"></i><br>ውደድ</div>
-                    <div onclick="interact(this, 'gold')"><i class="fa-regular fa-star"></i><br>አድምቅ</div>
-                    <div onclick="saveBookmark('${item.g}')"><i class="fa-regular fa-bookmark"></i><br>ሴቭ</div>
-                    <div onclick="shareApp('${item.g}')"><i class="fa-solid fa-share-nodes"></i><br>አጋራ</div>
-                </div>
-            `;
-            container.appendChild(card);
+    function render(data) {
+        const results = document.getElementById('results');
+        results.innerHTML = '';
+        if (data.length === 0) {
+            results.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">ምንም አልተገኘም...</p>';
+            return;
+        }
+
+        const grouped = data.reduce((acc, item) => {
+            const letter = item.l || 'ሌሎች';
+            if (!acc[letter]) acc[letter] = [];
+            acc[letter].push(item);
+            return acc;
+        }, {});
+
+        Object.keys(grouped).sort().forEach(letter => {
+            const section = document.createElement('div');
+            section.innerHTML = `<div style="font-size:1.5rem; color:var(--primary); border-bottom:2px solid var(--accent); margin:20px 0;">${letter}</div>`;
+            grouped[letter].forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'word-card';
+                card.innerHTML = `
+                    <span class="geez-text">${item.g}</span>
+                    <div class="meaning-text">${item.m}</div>
+                    <div class="tool-bar">
+                        <i class="fa-regular fa-heart" onclick="this.classList.toggle('fa-solid'); this.classList.toggle('active-red')"></i>
+                        <i class="fa-regular fa-star" onclick="this.classList.toggle('fa-solid'); this.classList.toggle('active-icon')"></i>
+                        <i class="fa-solid fa-share-nodes" onclick="shareWord('${item.g}')"></i>
+                    </div>
+                `;
+                results.appendChild(card);
+            });
+            results.appendChild(section);
         });
     }
 
-    function interact(el, color) { el.classList.toggle('active-' + color); const icon = el.querySelector('i'); icon.classList.toggle('fa-regular'); icon.classList.toggle('fa-solid'); }
-
-    function shareApp(word) {
-        if (navigator.share) {
-            navigator.share({ title: 'መጽሐፈ ሰዋስው', text: `የግዕዝ ቃል ተመልከቱ፡ ${word}`, url: window.location.href });
-        }
-    }
-
-    // --- 4. AUTH & TRANSLATION ---
-    function translateTo(langCode) {
-        const select = document.querySelector('.goog-te-combo');
-        if (select) { select.value = langCode; select.dispatchEvent(new Event('change')); }
-    }
-
-    auth.onAuthStateChanged(user => {
-        if (user) {
-            const initial = user.email[0].toUpperCase();
-            document.getElementById('userAvatar').innerText = initial;
-            document.getElementById('userName').innerText = user.displayName || "Online";
-            document.getElementById('profName').innerText = user.displayName || "ተጠቃሚ";
-            document.getElementById('profEmail').innerText = user.email;
-            document.getElementById('profLargeAvatar').innerText = initial;
-            document.getElementById('loginBtn').style.display = 'none';
-            document.getElementById('logoutBtn').style.display = 'block';
-        }
-    });
-
-    function googleLogin() { 
-        const provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider).then(() => closeLogin());
-    }
-    function handleLogout() { auth.signOut().then(() => location.reload()); }
-
-    // --- 5. LOGIC & INITIALIZATION ---
-    function showSection(id) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active-section'));
-        document.getElementById(id).classList.add('active-section');
-        document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
-        const navId = 'nav-' + (id === 'home' ? 'home' : id === 'bookmarks' ? 'bookmarks' : 'profile');
-        if(document.getElementById(navId)) document.getElementById(navId).classList.add('active');
-        window.scrollTo(0,0);
+    function shareWord(word) {
+        const text = encodeURIComponent(`ቃል: ${word}\nተጨማሪ በ: ${window.location.href}`);
+        window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`);
     }
 
     const letters = ["ሀ", "ለ", "ሐ", "መ", "ሠ", "ረ", "ሰ", "ቀ", "በ", "ተ", "ኀ", "ነ", "አ", "ከ", "ወ", "ዐ", "ዘ", "የ", "ደ", "ገ", "ጠ", "ጰ", "ጸ", "ፀ", "ፈ", "ፐ"];
@@ -1956,36 +1930,41 @@
     letters.forEach(L => {
         const span = document.createElement('span');
         span.innerText = L;
-        span.onclick = () => { document.getElementById('searchInput').value = L; render(dictionary.filter(i => i.g.startsWith(L))); };
+        span.onclick = () => { 
+            document.getElementById('searchInput').value = L; 
+            render(dictionary.filter(i => i.g.startsWith(L))); 
+            window.scrollTo({top: 200, behavior: 'smooth'});
+        };
         alphaList.appendChild(span);
     });
+
+    function toggleTheme() {
+        document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    }
+
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active-section'));
+        document.getElementById(id).classList.add('active-section');
+        document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
+        document.getElementById('nav-' + (id === 'home' ? 'home' : 'about')).classList.add('active');
+    }
 
     document.getElementById('searchInput').addEventListener('input', e => {
         const q = e.target.value.trim();
         render(dictionary.filter(i => i.g.includes(q) || i.m.includes(q)));
     });
 
-    function toggleTheme() {
-        const current = document.body.getAttribute('data-theme');
-        document.body.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'am', includedLanguages: 'am,om,ti,en,ar,he,de,fr,zh-CN'}, 'google_translate_element');
     }
 
-    window.onscroll = () => { document.getElementById('topBtn').style.display = window.scrollY > 500 ? 'flex' : 'none'; };
-
     window.onload = () => {
-        setTimeout(() => { document.getElementById('splash').style.opacity = '0'; setTimeout(() => document.getElementById('splash').style.display = 'none', 800); }, 2000);
+        const word = dictionary[Math.floor(Math.random() * dictionary.length)];
+        document.getElementById('dw-geez').innerText = word.g;
+        document.getElementById('dw-meaning').innerText = word.m;
         render(dictionary);
     };
-
-    function openLogin() { document.getElementById('authModal').style.display = 'flex'; }
-    function closeLogin() { document.getElementById('authModal').style.display = 'none'; }
 </script>
-
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'am', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-}
-</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
